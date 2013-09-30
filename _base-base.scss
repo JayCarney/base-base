@@ -46,9 +46,9 @@
     @else if $font-size == 36px {$shift: .5;}
     @else if $font-size == 48px {$shift: .4;}
     @else{
-      $font-size: $bfs;
+      $font-size: $base-font-size;
     }
-      @include vertical-groove($shift, $spacing, $font-size, $bfs, $lines);
+      @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
   } 
   ///////////////////////////////////////////
     //
@@ -72,8 +72,8 @@
       @else if $font-size == 32px {$shift:.50;}
       @else if $font-size == 34px {$shift:.46;}
       @else{
-        $font-size:$bfs;
+        $font-size:$base-font-size;
       }
-      @include vertical-groove($shift, $spacing, $font-size, $bfs, $lines);
+      @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
     } 
 }
