@@ -74,6 +74,7 @@
     @if $font-family == "Lato" {
       $shift:.30;
       @if $font-size == 12px {$shift:.29;}
+      @else if $font-size == 13px {$shift:.28;}
       @else if $font-size == 14px {$shift:.25;}
       @else if $font-size == 16px {$shift:.22;}
       @else if $font-size == 18px {$shift:.19;} 
@@ -119,4 +120,34 @@
         }
         @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
       }
+
+      ///////////////////////////////////////////
+        //
+        //  Rokkitt 
+        //
+        //  with a base-line-height of 26px
+        //
+        ///////////////////////////////////////////
+        @if $font-family == "Rokkitt" {
+          $shift:0;
+          @if $font-size == 12px {$shift:.4;}
+          @else if $font-size == 14px {$shift:.4;}
+          @else if $font-size == 16px {$shift:.35;}
+          @else if $font-size == 18px {$shift:.35;} 
+          @else if $font-size == 20px {$shift:.32}
+          @else if $font-size == 22px {$shift:.3;}
+          @else if $font-size == 24px {$shift:.75;}
+          @else if $font-size == 26px {$shift:.75;}
+          @else if $font-size == 28px {$shift:.72;}
+          @else if $font-size == 30px {$shift:.72;}
+          @else if $font-size == 32px {$shift:.7;}
+          @else if $font-size == 34px {$shift:.7;}
+          @else if $font-size == 36px {$shift:.7;}
+          @else if $font-size == 38px {$shift:.65;}
+          @else if $font-size == 40px {$shift:.6;}
+          @else{
+            $font-size:$base-font-size;
+          }
+          @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+        }
 }
