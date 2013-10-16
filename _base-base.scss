@@ -134,6 +134,7 @@
         @if $font-family == "Rokkitt" {
           $shift:0;
           @if $font-size == 12px {$shift:.4;}
+          @else if $font-size == 13px {$shift:.4;}
           @else if $font-size == 14px {$shift:.4;}
           @else if $font-size == 16px {$shift:.35;}
           @else if $font-size == 18px {$shift:.35;} 
