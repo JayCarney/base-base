@@ -159,7 +159,7 @@
 
         ///////////////////////////////////////////
           //
-          //  Rokkitt 
+          //  Droid Sans 
           //
           //  with a base-line-height of 26px
           //
@@ -186,4 +186,64 @@
             }
             @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
           }
+
+            ///////////////////////////////////////////
+            //
+            //  Open Sans 
+            //
+            //  with a base-line-height of 26px
+            //
+            ///////////////////////////////////////////
+            @if $font-family == "Open Sans" {
+              $shift:0;
+              @if $font-size == 12px {$shift:0.34;}
+              @else if $font-size == 14px {$shift:.32;}
+              @else if $font-size == 16px {$shift:.25;}
+              @else if $font-size == 18px {$shift:.25;}
+              @else if $font-size == 20px {$shift:.22;}
+              @else if $font-size == 22px {$shift:.15;}
+              @else if $font-size == 24px {$shift:.65;}
+              @else if $font-size == 26px {$shift:.62;}
+              @else if $font-size == 28px {$shift:.57;}
+              @else if $font-size == 30px {$shift:.57;}
+              @else if $font-size == 32px {$shift:.53;}
+              @else if $font-size == 34px {$shift:.51;}
+              @else if $font-size == 36px {$shift:.48;}
+              @else if $font-size == 38px {$shift:.43;}
+              @else if $font-size == 40px {$shift:.41;}
+              @else{
+                $font-size:$base-font-size;
+              }
+              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+            }
+
+            ///////////////////////////////////////////
+            //
+            //  Georgia
+            //
+            //  with a base-line-height of 26px
+            //
+            ///////////////////////////////////////////
+            @if $font-family == "Georgia" {
+              $shift:0;
+              @if $font-size == 12px {$shift:.33;}
+              @else if $font-size == 14px {$shift:.31;}
+              @else if $font-size == 16px {$shift:.30;}
+              @else if $font-size == 18px {$shift:.27;}
+              @else if $font-size == 20px {$shift:.22;}
+              @else if $font-size == 22px {$shift:.22;}
+              @else if $font-size == 24px {$shift:.68;}
+              @else if $font-size == 26px {$shift:.65;}
+              @else if $font-size == 28px {$shift:.63;}
+              @else if $font-size == 30px {$shift:.60;}
+              @else if $font-size == 32px {$shift:.58;}
+              @else if $font-size == 34px {$shift:.55;}
+              @else if $font-size == 36px {$shift:.53;}
+              @else if $font-size == 38px {$shift:.51;}
+              @else if $font-size == 40px {$shift:.48;}
+              @else{
+                $font-size:$base-font-size;
+              }
+              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+            }
 }
