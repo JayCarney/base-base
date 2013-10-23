@@ -156,4 +156,34 @@
           }
           @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
         }
+
+        ///////////////////////////////////////////
+          //
+          //  Rokkitt 
+          //
+          //  with a base-line-height of 26px
+          //
+          ///////////////////////////////////////////
+          @if $font-family == "Droid Sans" {
+            $shift:0;
+            @if $font-size == 12px {$shift:.35;}
+            @else if $font-size == 14px {$shift:.3;}
+            @else if $font-size == 16px {$shift:.3;}
+            @else if $font-size == 18px {$shift:.26;} 
+            @else if $font-size == 20px {$shift:.22;}
+            @else if $font-size == 22px {$shift:.22;}
+            @else if $font-size == 24px {$shift:.7;}
+            @else if $font-size == 26px {$shift:.64;}
+            @else if $font-size == 28px {$shift:.64;}
+            @else if $font-size == 30px {$shift:.59;}
+            @else if $font-size == 32px {$shift:.56;}
+            @else if $font-size == 34px {$shift:.52;}
+            @else if $font-size == 36px {$shift:.51;}
+            @else if $font-size == 38px {$shift:.48;}
+            @else if $font-size == 40px {$shift:.48;}
+            @else{
+              $font-size:$base-font-size;
+            }
+            @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+          }
 }
