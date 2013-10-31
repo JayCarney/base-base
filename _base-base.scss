@@ -266,7 +266,10 @@
               @else if $font-size == 18px {$shift:.21;}
               @else if $font-size == 20px {$shift:.21;}
               @else if $font-size == 22px {$shift:.21;}
-              @else if $font-size == 24px {$shift:.65;}
+              @else if $font-size == 24px {
+                @if $lines == 2 {$shift:.65;}
+                @else if $lines == 1{$shift: .15;}
+              }
               @else if $font-size == 26px {$shift:.60;}
               @else if $font-size == 28px {$shift:.60;}
               @else if $font-size == 30px {$shift:.58;}
