@@ -261,6 +261,7 @@
               $shift:0;
               @if $font-size == 12px {$shift:.30;}
               @else if $font-size == 11px {$shift:.30;}
+              @else if $font-size == 13px {$shift:.28;}
               @else if $font-size == 14px {$shift:.28;}
               @else if $font-size == 16px {$shift:.24;}
               @else if $font-size == 18px {$shift:.21;}
