@@ -105,6 +105,7 @@
         $shift:0;
         @if $font-size == 12px {$shift:.29;}
         @else if $font-size == 11px {$shift:.32;}
+        @else if $font-size == 13px {$shift:.29;}
         @else if $font-size == 14px {$shift:.28;}
         @else if $font-size == 16px {$shift:.23;}
         @else if $font-size == 18px {$shift:.21;} 
@@ -119,6 +120,7 @@
         @else if $font-size == 36px {$shift:.47;}
         @else if $font-size == 38px {$shift:.44;}
         @else if $font-size == 40px {$shift:.43;}
+        @else if $font-size == 42px {$shift:.38;}
         @else if $font-size == 48px {$shift:.28;}
         @else if $font-size == 96px {$shift:.60;}
         @else{
