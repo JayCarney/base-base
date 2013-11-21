@@ -223,9 +223,15 @@
               @else if $font-size == 50px {$shift:.40;}
               @else if $font-size == 52px {$shift:.32;}
               @else if $font-size == 54px {$shift:.80;}
-              @else if $font-size == 56px {$shift:.80;}
+              @else if $font-size == 56px {
+                @if $lines == 3 {$shift:.80;}
+                @else if $lines == 2{$shift: .22;}
+              }
               @else if $font-size == 58px {$shift:.76;}
-              @else if $font-size == 60px {$shift:.75;}
+              @else if $font-size == 60px {
+                @if $lines == 3 {$shift:.75;}
+                @else if $lines == 2{$shift: .18;}
+              }
               @else{
                 $font-size:$base-font-size;
               }
