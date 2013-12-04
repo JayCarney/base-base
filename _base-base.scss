@@ -248,6 +248,7 @@
             @if $font-family == "Georgia" {
               $shift:0;
               @if $font-size == 12px {$shift:.33;}
+              @else if $font-size == 13px {$shift:.31;}
               @else if $font-size == 14px {$shift:.31;}
               @else if $font-size == 16px {$shift:.30;}
               @else if $font-size == 18px {
