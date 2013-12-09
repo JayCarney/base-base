@@ -290,4 +290,39 @@
               }
               @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
             }
+
+            ///////////////////////////////////////////
+            //
+            //  Jellyka Castles Queen Regular
+            //
+            //  with a base-line-height of 26px
+            //
+            ///////////////////////////////////////////
+            @if $font-family == "jellyka_castles_queenregular" { 
+              $shift:0;
+              @if $font-size == 12px {$shift:.4;}
+              @else if $font-size == 11px {$shift:.4;}
+              @else if $font-size == 13px {$shift:0;}
+              @else if $font-size == 14px {$shift:.4;}
+              @else if $font-size == 16px {$shift:.4;}
+              @else if $font-size == 18px {$shift:.35;}
+              @else if $font-size == 20px {$shift:.35;}
+              @else if $font-size == 22px {$shift:.35;}
+              @else if $font-size == 24px {$shift:.82;}
+              @else if $font-size == 26px {$shift:.82;}
+              @else if $font-size == 28px {$shift:.82;}
+              @else if $font-size == 30px {$shift:.80;}
+              @else if $font-size == 32px {$shift:.78;}
+              @else if $font-size == 34px {$shift:.78;}
+              @else if $font-size == 36px {$shift:.78;}
+              @else if $font-size == 38px {$shift:.78;}
+              @else if $font-size == 40px {$shift:.78;}
+              @else if $font-size == 48px {$shift:.78;}
+              @else if $font-size == 60px {$shift:0;}
+              @else if $font-size == 96px {$shift:.5;}
+              @else{
+                $font-size:$base-font-size;
+              }
+              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+            }
 }
