@@ -216,6 +216,22 @@
               @else if $font-size == 36px {$shift:.48;}
               @else if $font-size == 38px {$shift:.43;}
               @else if $font-size == 40px {$shift:.41;}
+              @else if $font-size == 42px {$shift:.49;}
+              @else if $font-size == 44px {$shift:.44;}
+              @else if $font-size == 46px {$shift:.44;}
+              @else if $font-size == 48px {$shift:.41;}
+              @else if $font-size == 50px {$shift:.40;}
+              @else if $font-size == 52px {$shift:.32;}
+              @else if $font-size == 54px {$shift:.80;}
+              @else if $font-size == 56px {
+                @if $lines == 3 {$shift:.80;}
+                @else if $lines == 2{$shift: .22;}
+              }
+              @else if $font-size == 58px {$shift:.76;}
+              @else if $font-size == 60px {
+                @if $lines == 3 {$shift:.75;}
+                @else if $lines == 2{$shift: .18;}
+              }
               @else{
                 $font-size:$base-font-size;
               }
@@ -232,6 +248,7 @@
             @if $font-family == "Georgia" {
               $shift:0;
               @if $font-size == 12px {$shift:.33;}
+              @else if $font-size == 13px {$shift:.31;}
               @else if $font-size == 14px {$shift:.31;}
               @else if $font-size == 16px {$shift:.30;}
               @else if $font-size == 18px {
