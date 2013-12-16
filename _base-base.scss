@@ -48,7 +48,7 @@
     //  with a base-line-height of 26px
     //
     ///////////////////////////////////////////
-  @if $font-family == "Proxima Nova" {
+  @if $font-family == "Proxima Nova" or $font-family == "proxima-nova" {
     $shift:0;
     @if $font-size == 11px {$shift:.37;}
     @else if $font-size == 12px {$shift:.34;}
@@ -67,6 +67,7 @@
     @else if $font-size == 36px {$shift:.55;}
     @else if $font-size == 38px {$shift:.50;}
     @else if $font-size == 40px {$shift:.48;}
+    @else if $font-size == 48px {$shift:.43;}
     @else if $font-size == 60px {$shift:.70;}
     @else{
       $font-size:$base-font-size;
@@ -210,9 +211,10 @@
             //  with a base-line-height of 26px
             //
             ///////////////////////////////////////////
-            @if $font-family == "Open Sans" {
+            @if $font-family == "Open Sans" or $font-family == "open-sans" {
               $shift:0;
               @if $font-size == 12px {$shift:0.34;}
+              @else if $font-size == 13px {$shift:.32;}
               @else if $font-size == 14px {$shift:.32;}
               @else if $font-size == 16px {$shift:.25;}
               @else if $font-size == 18px {$shift:.25;}
