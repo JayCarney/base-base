@@ -49,21 +49,32 @@
     //
     ///////////////////////////////////////////
   @if $font-family == "Proxima Nova" {
-    $shift: .3;
-    @if $font-size == 16px {$shift: .3;}
-    @else if $font-size == 18px {$shift: .25;}
-    @else if $font-size == 24px {
-      @if $lines == 1 {$shift: .2;}
-      @else if $lines == 2 {$shift: -.3;}
-    }
-    @else if $font-size == 30px {$shift: .6;}
-    @else if $font-size == 36px {$shift: .5;}
-    @else if $font-size == 48px {$shift: .4;}
+    $shift:0;
+    @if $font-size == 11px {$shift:.37;}
+    @else if $font-size == 12px {$shift:.34;}
+    @else if $font-size == 13px {$shift:.34;}
+    @else if $font-size == 14px {$shift:.32;}
+    @else if $font-size == 16px {$shift:.32;}
+    @else if $font-size == 18px {$shift:.28;}
+    @else if $font-size == 20px {$shift:.28;}
+    @else if $font-size == 22px {$shift:.25;}
+    @else if $font-size == 24px {$shift:.70;}
+    @else if $font-size == 26px {$shift:.67;}
+    @else if $font-size == 28px {$shift:.62;}
+    @else if $font-size == 30px {$shift:.62;}
+    @else if $font-size == 32px {$shift:.58;}
+    @else if $font-size == 34px {$shift:.58;}
+    @else if $font-size == 36px {$shift:.55;}
+    @else if $font-size == 38px {$shift:.50;}
+    @else if $font-size == 40px {$shift:.48;}
+    @else if $font-size == 60px {$shift:.70;}
     @else{
-      $font-size: $base-font-size;
+      $font-size:$base-font-size;
     }
-      @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+    @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
   } 
+
+
   ///////////////////////////////////////////
     //
     //  Lato 
