@@ -96,7 +96,7 @@
               @else if $font-size == 13px {$shift:.70;}
               @else if $font-size == 14px {$shift:.70;}
               @else if $font-size == 16px {$shift:.67;}
-              @else if $font-size == 18px {$shift:.67;}
+              @else if $font-size == 18px {$shift:.60;}
               @else if $font-size == 20px {$shift:.60;}
               @else if $font-size == 22px {$shift:.52;}
               @else if $font-size == 24px {$shift:.50;}
@@ -237,6 +237,44 @@
               // @else if $font-size == 56px {$shift:0;}
               // @else if $font-size == 58px {$shift:0;}
               // @else if $font-size == 60px {$shift:0;}
+              
+              @else{
+                $font-size:$base-font-size;
+              }
+              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+            }
+
+            ///////////////////////////////////////////
+            //
+            //  Alternate Gothis No. 2D
+            //
+            ///////////////////////////////////////////
+            @if $font-family == "alternate-gothic-no-2-d" { 
+              $shift:0;
+              @if $font-size == 12px {$shift:.75}
+              @else if $font-size == 14px {$shift:.80;}
+              @else if $font-size == 16px {$shift:.70;}
+              @else if $font-size == 18px {$shift:.70;}
+              @else if $font-size == 20px {$shift:.65;}
+              @else if $font-size == 22px {$shift:.60;}
+              @else if $font-size == 24px {$shift:.60;}
+              @else if $font-size == 26px {$shift:.05;}
+              @else if $font-size == 28px {$shift:.00;}
+              @else if $font-size == 30px {$shift:.90;}
+              @else if $font-size == 32px {$shift:.90;}
+              @else if $font-size == 34px {$shift:.85;}
+              @else if $font-size == 36px {$shift:.85;}
+              @else if $font-size == 38px {$shift:.80;}
+              @else if $font-size == 40px {$shift:.25;}
+              @else if $font-size == 42px {$shift:.20;}
+              @else if $font-size == 44px {$shift:.20;}
+              @else if $font-size == 46px {$shift:.15;}
+              @else if $font-size == 48px {$shift:.15;}
+              @else if $font-size == 50px {$shift:.05;}
+              @else if $font-size == 96px {
+                @if $lines == 8  {$shift:.15;}
+                @else if $lines == 6{$shift:.10}
+              }
               
               @else{
                 $font-size:$base-font-size;
