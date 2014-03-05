@@ -281,4 +281,33 @@
               }
               @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
             }
+
+            ///////////////////////////////////////////
+            //
+            //  Verdana
+            //
+            ///////////////////////////////////////////
+            @if $font-family == "Verdana" { 
+              $shift:0;
+              @if $font-size == 12px {$shift:.70}
+              @else if $font-size == 14px {$shift:.65;}
+              @else if $font-size == 16px {$shift:.60;}
+              @else if $font-size == 18px {$shift:.50;}
+              @else if $font-size == 20px {$shift:.45;}
+              @else if $font-size == 22px {$shift:.45;}
+              @else if $font-size == 24px {$shift:.39;}
+              @else if $font-size == 26px {$shift:.80;}
+              @else if $font-size == 28px {$shift:.72;}
+              @else if $font-size == 30px {$shift:.64;}
+              @else if $font-size == 32px {$shift:.62;}
+              @else if $font-size == 34px {$shift:.60;}
+              @else if $font-size == 36px {$shift:.50;}
+              @else if $font-size == 38px {$shift:.45;}
+              @else if $font-size == 40px {$shift:.85;}
+              
+              @else{
+                $font-size:$base-font-size;
+              }
+              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
+            }
 }
