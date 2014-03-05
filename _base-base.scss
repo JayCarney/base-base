@@ -304,6 +304,7 @@
               @else if $font-size == 36px {$shift:.50;}
               @else if $font-size == 38px {$shift:.45;}
               @else if $font-size == 40px {$shift:.85;}
+              @else if $font-size == 48px {$shift:.90;}
               
               @else{
                 $font-size:$base-font-size;
