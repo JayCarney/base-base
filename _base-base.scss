@@ -30,9 +30,6 @@
   } @else {
     @include rhythm($shift, 0, $spacing -  $shift, 0, $to-size);
   }
-    } @else {
-      @include rhythm($shift, 0, $spacing -  $shift, 0, $to-size);
-    }
 }
 
 /*-- Some extenable font sizes. --*/
