@@ -465,14 +465,20 @@
     $shift:0;
     @if $font-size == 12px {$shift:.7;}
     @else if $font-size == 14px {$shift:.65;}
-    @else if $font-size == 16px {$shift:.60;}
+    @else if $font-size == 16px {
+      $shift:.60;
+      @if $lines == 1{$shift:.05;}
+    }
     @else if $font-size == 18px {$shift:.50;}
     @else if $font-size == 20px {$shift:.45;}
     @else if $font-size == 22px {$shift:.45;}
     @else if $font-size == 24px {$shift:.35;}
     @else if $font-size == 26px {$shift:.80;}
     @else if $font-size == 28px {$shift:.70;}
-    @else if $font-size == 30px {$shift:.65;}
+    @else if $font-size == 30px {
+      $shift:.65;
+      @if $lines == 2 {$shift: .15;}
+    }
     @else if $font-size == 32px {$shift:.65;}
     @else if $font-size == 34px {$shift:.55;}
     @else if $font-size == 36px {$shift:.50;}
