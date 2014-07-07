@@ -473,7 +473,10 @@
       @if $lines == 1{$shift:.05;}
     }
     @else if $font-size == 18px {$shift:.50;}
-    @else if $font-size == 20px {$shift:.45;}
+    @else if $font-size == 20px {
+      $shift:.45;
+      @if $lines == 1 {$shift:0.9;}
+    }
     @else if $font-size == 22px {$shift:.45;}
     @else if $font-size == 24px {$shift:.35;}
     @else if $font-size == 26px {$shift:.80;}
