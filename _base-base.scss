@@ -463,7 +463,10 @@
   }
   @if $font-family == "Lato" { 
     $shift:0;
-    @if $font-size == 12px {$shift:.7;}
+    @if $font-size == 12px {
+      $shift:.7;
+      @if $lines == 1{$shift:.2;}
+    }
     @else if $font-size == 14px {
       $shift:.65;
       @if $lines == 1{$shift:.15;}
