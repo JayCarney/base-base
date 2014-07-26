@@ -11,7 +11,7 @@
   $line-height: lines-for-font-size($font-size)
   ){
   @if($adjust){
-    $lines: $lines + get-space($font-size,$font-family,$line-height);
+    $lines: $lines + get-base($font-size,$font-family,$line-height);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   padding-top: #{$adjustment}em;
@@ -25,7 +25,7 @@
   $line-height: lines-for-font-size($font-size)
   ){
   @if($adjust){
-    $lines: $lines + get-space($font-size,$font-family,$line-height);
+    $lines: $lines - get-base($font-size,$font-family,$line-height);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   padding-bottom: #{$adjustment}em;
@@ -39,7 +39,7 @@
   $line-height: lines-for-font-size($font-size)
   ){
   @if($adjust){
-    $lines: $lines + get-space($font-size,$font-family,$line-height);
+    $lines: $lines + get-base($font-size,$font-family,$line-height);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   margin-top: #{$adjustment}em;
@@ -53,7 +53,7 @@
   $line-height: lines-for-font-size($font-size)
   ){
   @if($adjust){
-    $lines: $lines + get-space($font-size,$font-family,$line-height);
+    $lines: $lines - get-base($font-size,$font-family,$line-height);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   margin-bottom: #{$adjustment}em;
@@ -91,31 +91,37 @@
 }
 
 
-@function get-space(
+@function get-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
   $lines: lines-for-font-size($font-size) 
   ){
-  $font-settings: map-get($base-base-fonts,$font-family);
-  $size-settings: map-get($font-settings, $font-size);
-  @if map-has-key($size-settings, $lines){
-    @return map-get($size-settings, $lines);
-  } @else {
-    @return map-get($size-settings, 'd');
+  @if map-has-key($base-base-fonts,$font-family){
+    $font-settings: map-get($base-base-fonts,$font-family);
+    @if map-has-key($font-settings, $font-size){
+      $size-settings: map-get($font-settings, $font-size);
+      @if map-has-key($size-settings, $lines){
+        @return map-get($size-settings, $lines);
+      } @else {
+        @return map-get($size-settings, 'd');
+      }
+    }
   }
+  @return 0 //No size found;
 }
 
 @mixin base-base(
   $font-size: $base-font-size, 
   $font-family: $default-font-family,
-  $spacing: lines-for-font-size($font-size), // Trailing white space control.
+  $trailer: lines-for-font-size($font-size), // Trailing white space control.
+  $leader: 0, //Leading white space control
   $lines: lines-for-font-size($font-size) //Units of lineheight
 ){
-  $base_adjust: get-space($font-size, $font-family, $lines);
+  $base_adjust: get-base($font-size, $font-family, $lines);
   $font_adjust: ($base-font-size / $font-size);
   $top_adjust: $base_adjust * $font_adjust;
-  padding-top: #{($base_adjust * $base-line-height) / $font-size}em;
-  margin-bottom: #{(($spacing - $base_adjust) * $base-line-height) / $font-size}em;
+  padding-top: #{(($base_adjust + $leader) * $base-line-height) / $font-size}em;
+  margin-bottom: #{(($trailer - $base_adjust) * $base-line-height) / $font-size}em;
   margin-top: 0;
   padding-bottom: 0;
   font-size: #{1 / $font_adjust}em;
