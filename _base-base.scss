@@ -115,7 +115,8 @@
   $font-family: $default-font-family,
   $trailer: lines-for-font-size($font-size), // Trailing white space control.
   $leader: 0, //Leading white space control
-  $lines: lines-for-font-size($font-size) //Units of lineheight
+  $lines: lines-for-font-size($font-size), //Units of lineheight
+  $ffs: $fallback-font-stack
 ){
   $base_adjust: get-base($font-size, $font-family, $lines);
   $font_adjust: ($base-font-size / $font-size);
@@ -126,5 +127,5 @@
   padding-bottom: 0;
   font-size: #{1 / $font_adjust}em;
   line-height: $lines * $base-line-height;
-  font-family: $font-family;
+  font-family: $font-family, $ffs;
 }
