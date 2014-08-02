@@ -94,7 +94,7 @@
 @function get-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $lines: lines-for-font-size($font-size) 
+  $lines: lines-for-font-size($font-size)
   ){
   @if map-has-key($base-base-fonts,$font-family){
     $font-settings: map-get($base-base-fonts,$font-family);
@@ -108,6 +108,14 @@
     }
   }
   @return 0 //No size found;
+}
+
+@function get-bottom-base(
+  $font-size: $base-font-size,
+  $font-family: $default-font-family,
+  $lines: lines-for-font-size($font-size)
+  ){
+  @return 1 - get-base($font-size, $font-family, $lines);
 }
 
 @mixin base-base(
