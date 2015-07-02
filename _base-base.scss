@@ -3,7 +3,11 @@
 =====*/
 
 @function px2bl($px){
-  @return $px/14px;
+  @return $px/$base-line-height;
+}
+
+@function p2b($px){
+  @return px2bl($px);
 }
 
 @import 'font-settings';
