@@ -20,7 +20,7 @@
   $line-height: lines-for-font-size($font-size)
   ){
   @if($adjust){
-    $lines: $lines + get-base($font-size,$font-family,$line-height);
+    $lines: $lines - 1 + get-base($font-size,$font-family,$line-height);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   padding-top: #{$adjustment}em;
@@ -48,7 +48,7 @@
   $line-height: lines-for-font-size($font-size)
   ){
   @if($adjust){
-    $lines: $lines + get-base($font-size,$font-family,$line-height);
+    $lines: $lines - 1 + get-base($font-size,$font-family,$line-height);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   margin-top: #{$adjustment}em;
@@ -131,15 +131,15 @@
   $font-size: $base-font-size, 
   $font-family: $default-font-family,
   $trailer: lines-for-font-size($font-size), // Trailing white space control.
-  $leader: 0, //Leading white space control
+  $leader: 1, //Leading white space control
   $lines: lines-for-font-size($font-size), //Units of lineheight
   $ffs: $fallback-font-stack
 ){
   $base_adjust: get-base($font-size, $font-family, $lines);
   $font_adjust: ($base-font-size / $font-size);
   $top_adjust: $base_adjust * $font_adjust;
-  padding-top: #{(($base_adjust + $leader) * $base-line-height) / $font-size}em;
-  margin-bottom: #{(($trailer - $base_adjust) * $base-line-height) / $font-size}em;
+  @include padding-leader($leader, $font-size, true, $font-family, $lines);
+  @include margin-trailer($trailer, $font-size, true, $font-family, $lines);
   margin-top: 0;
   padding-bottom: 0;
   font-size: #{1 / $font_adjust}em;
