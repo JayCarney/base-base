@@ -12,6 +12,14 @@
 
 @import 'font-settings';
 
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  } 
+  @return $string;
+}
+
 @mixin padding-leader(
   $lines: 1,
   $font-size: $base-font-size,
@@ -105,8 +113,9 @@
   $font-family: $default-font-family,
   $lines: lines-for-font-size($font-size)
   ){
-  @if map-has-key($base-base-fonts,$font-family){
-    $font-settings: map-get($base-base-fonts,$font-family);
+  $cleaned-font-family: str-replace(to-lower-case($font-family),' ','-');
+  @if map-has-key($base-base-fonts,$cleaned-font-family){
+    $font-settings: map-get($base-base-fonts,$cleaned-font-family);
     @if map-has-key($font-settings, $font-size){
       $size-settings: map-get($font-settings, $font-size);
       @if map-has-key($size-settings, $lines){
