@@ -93,6 +93,7 @@
 @function lines-for-font-size(
   $font-size: $base-font-size
   ){
+  $min-line-padding: 2px;
   $lines: ceil($font-size / $base-line-height);
   @if($lines * $base-line-height - $font-size < $min-line-padding * 2){
     $lines: $lines + 1;
