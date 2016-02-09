@@ -10,7 +10,12 @@
   @return px2bl($px);
 }
 
-@import 'font-settings';
+@import 'font-settings-14';
+@import 'font-settings-16';
+$base-base-fonts: (
+  14px: $base-base-fonts-14,
+  16px: $base-base-fonts-16
+);
 
 @function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
@@ -112,17 +117,21 @@
 @function get-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $lines: lines-for-font-size($font-size)
+  $lines: lines-for-font-size($font-size),
+  $base-height: $base-line-height
   ){
-  $cleaned-font-family: str-replace(to-lower-case($font-family),' ','-');
-  @if map-has-key($base-base-fonts,$cleaned-font-family){
-    $font-settings: map-get($base-base-fonts,$cleaned-font-family);
-    @if map-has-key($font-settings, $font-size){
-      $size-settings: map-get($font-settings, $font-size);
-      @if map-has-key($size-settings, $lines){
-        @return map-get($size-settings, $lines);
-      } @else {
-        @return map-get($size-settings, 'd');
+  @if map-has-key($base-base-fonts, $base-height){
+    $base-line-settings: map-get($base-base-fonts, $base-height);
+    $cleaned-font-family: str-replace(to-lower-case($font-family),' ','-');
+    @if map-has-key($base-line-settings,$cleaned-font-family){
+      $font-settings: map-get($base-line-settings,$cleaned-font-family);
+      @if map-has-key($font-settings, $font-size){
+        $size-settings: map-get($font-settings, $font-size);
+        @if map-has-key($size-settings, $lines){
+          @return map-get($size-settings, $lines);
+        } @else {
+          @return map-get($size-settings, 'd');
+        }
       }
     }
   }
