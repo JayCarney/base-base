@@ -2,6 +2,85 @@
 @mixins
 =====*/
 
+@function px2bl($px){
+  @return $px/$base-line-height;
+}
+
+@function p2b($px){
+  @return px2bl($px);
+}
+
+@import 'font-settings-14';
+@import 'font-settings-16';
+$base-base-fonts: (
+  14px: $base-base-fonts-14,
+  16px: $base-base-fonts-16
+);
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  } 
+  @return $string;
+}
+
+@mixin padding-leader(
+  $lines: 1,
+  $font-size: $base-font-size,
+  $adjust: false,
+  $font-family: $default-font-family,
+  $line-height: lines-for-font-size($font-size)
+  ){
+  @if($adjust){
+    $lines: $lines + get-base($font-size,$font-family,$line-height);
+  }
+  $adjustment: $lines * $base-line-height / $font-size;
+  padding-top: #{$adjustment}em;
+};
+
+@mixin padding-trailer(
+  $lines: 1,
+  $font-size: $base-font-size,
+  $adjust: false,
+  $font-family: $default-font-family,
+  $line-height: lines-for-font-size($font-size)
+  ){
+  @if($adjust){
+    $lines: $lines - get-base($font-size,$font-family,$line-height);
+  }
+  $adjustment: $lines * $base-line-height / $font-size;
+  padding-bottom: #{$adjustment}em;
+};
+
+@mixin margin-leader(
+  $lines: 1,
+  $font-size: $base-font-size,
+  $adjust: false,
+  $font-family: $default-font-family,
+  $line-height: lines-for-font-size($font-size)
+  ){
+  @if($adjust){
+    $lines: $lines + get-base($font-size,$font-family,$line-height);
+  }
+  $adjustment: $lines * $base-line-height / $font-size;
+  margin-top: #{$adjustment}em;
+};
+
+@mixin margin-trailer(
+  $lines: 1,
+  $font-size: $base-font-size,
+  $adjust: false,
+  $font-family: $default-font-family,
+  $line-height: lines-for-font-size($font-size)
+  ){
+  @if($adjust){
+    $lines: $lines - get-base($font-size,$font-family,$line-height);
+  }
+  $adjustment: $lines * $base-line-height / $font-size;
+  margin-bottom: #{$adjustment}em;
+};
+
 @mixin neutralise(){
   font-family: $default-font-family, $fallback-font-stack;
   font-size: $base-font-size;
@@ -16,617 +95,73 @@
   }
 }
 
-@mixin vertical-groove(
-  $shift, //Rhythm Vertical Shift
-  $spacing: lines-for-font-size($base-font-size), // Trailing white space control.
-  $to-size: $base-font-size, //New Font Size
-  $from-size: $base-font-size, //Current Font Size
-  $lines: lines-for-font-size($to-size) //Lines, fallback to minimum usable number.
+@function lines-for-font-size(
+  $font-size: $base-font-size
   ){
-  @include adjust-font-size-to($to-size, $lines, $from-size);
-  line-height:$lines*$base-line-height;
-  @if $shift > 0{
-    @include rhythm(0, $shift, 0, $spacing - $shift, $to-size);
-  } @else {
-    @include rhythm($shift, 0, $spacing -  $shift, 0, $to-size);
+  $min-line-padding: 2px;
+  $lines: ceil($font-size / $base-line-height);
+  @if($lines * $base-line-height - $font-size < $min-line-padding * 2){
+    $lines: $lines + 1;
+  }
+  @return $lines;
+}
+
+@mixin establish-baseline($font-size: $base-font-size) {
+  html {
+    font-size: $font-size;
+    line-height: lines-for-font-size($font-size) * $base-line-height;
   }
 }
 
-/*-- Some extenable font sizes. --*/
-@mixin base-base(
-  // based on    font: font-style font-variant font-weight font-size/line-height font-family;
-  $font-size: $base-font-size, //New Font Size
+
+@function get-base(
+  $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $spacing: lines-for-font-size($font-size), // Trailing white space control.
-  $lines: lines-for-font-size($font-size) //Lines, fallback to minimum usable number.
+  $lines: lines-for-font-size($font-size),
+  $base-height: $base-line-height
   ){
-  font-family: $font-family, $fallback-font-stack;
-  ///////////////////////////////////////////
-    //
-    //  Proxima Nova 
-    //
-    //  with a base-line-height of 26px
-    //
-    ///////////////////////////////////////////
-  @if $font-family == "Proxima Nova" or $font-family == "proxima-nova" {
-    $shift:0;
-    @if $font-size == 11px {$shift:.37;}
-    @else if $font-size == 12px {$shift:.34;}
-    @else if $font-size == 13px {$shift:.34;}
-    @else if $font-size == 14px {$shift:.32;}
-    @else if $font-size == 16px {$shift:.32;}
-    @else if $font-size == 18px {$shift:.28;}
-    @else if $font-size == 20px {$shift:.28;}
-    @else if $font-size == 22px {$shift:.25;}
-    @else if $font-size == 24px {$shift:.70;}
-    @else if $font-size == 26px {$shift:.67;}
-    @else if $font-size == 28px {$shift:.62;}
-    @else if $font-size == 30px {
-      @if $lines == 1 {$shift:.12;}
-      @else {$shift: .62;}
-    }
-    @else if $font-size == 32px {$shift:.58;}
-    @else if $font-size == 34px {$shift:.58;}
-    @else if $font-size == 36px {$shift:.55;}
-    @else if $font-size == 38px {$shift:.50;}
-    @else if $font-size == 40px {$shift:.48;}
-    @else if $font-size == 48px {$shift:.43;}
-    @else if $font-size == 56px {$shift:.30;}
-    @else if $font-size == 60px {
-      @if $lines == 2{$shift:.20;}
-      @else {$shift:.70;}
-    }
-    @else{
-      $font-size:$base-font-size;
-    }
-    @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-  } 
-
-
-  ///////////////////////////////////////////
-    //
-    //  Lato 
-    //
-    //  with a base-line-height of 26px
-    //
-    ///////////////////////////////////////////
-    @if $font-family == "Lato" {
-      $shift:.30;
-      @if $font-size == 12px {$shift:.29;}
-      @else if $font-size == 13px {$shift:.28;}
-      @else if $font-size == 14px {$shift:.25;}
-      @else if $font-size == 16px {$shift:.22;}
-      @else if $font-size == 18px {$shift:.19;} 
-      @else if $font-size == 20px {$shift:.16;}
-      @else if $font-size == 22px {$shift:.14;}
-      @else if $font-size == 24px {$shift:.60;}
-      @else if $font-size == 26px {$shift:.56;}
-      @else if $font-size == 28px {$shift:.54;}
-      @else if $font-size == 30px {$shift:.50;}
-      @else if $font-size == 32px {$shift:.50;}
-      @else if $font-size == 34px {$shift:.46;}
-      @else if $font-size == 36px {$shift:.44;}
-      @else if $font-size == 38px {$shift:.40;}
-      @else if $font-size == 40px {$shift:.38;}
-      @else{
-        $font-size:$base-font-size;
-      }
-      @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-    } 
-    ///////////////////////////////////////////
-      //
-      //  Ubuntu 
-      //
-      //  with a base-line-height of 26px
-      //
-      ///////////////////////////////////////////
-      @if $font-family == "Ubuntu" {
-        $shift:0;
-        @if $font-size == 12px {$shift:.29;}
-        @else if $font-size == 11px {$shift:.32;}
-        @else if $font-size == 13px {$shift:.29;}
-        @else if $font-size == 14px {$shift:.28;}
-        @else if $font-size == 16px {$shift:.23;}
-        @else if $font-size == 18px {$shift:.21;} 
-        @else if $font-size == 20px {$shift:.2;}
-        @else if $font-size == 22px {$shift:.17;}
-        @else if $font-size == 24px {$shift:.70;}
-        @else if $font-size == 26px {$shift:.63;}
-        @else if $font-size == 28px {$shift:.59;}
-        @else if $font-size == 30px {$shift:.53;}
-        @else if $font-size == 32px {$shift:.51;}
-        @else if $font-size == 34px {$shift:.48;}
-        @else if $font-size == 36px {$shift:.47;}
-        @else if $font-size == 38px {$shift:.44;}
-        @else if $font-size == 40px {$shift:.43;}
-        @else if $font-size == 42px {$shift:.38;}
-        @else if $font-size == 48px {$shift:.28;}
-        @else if $font-size == 96px {$shift:.60;}
-        @else{
-          $font-size:$base-font-size;
+  @if map-has-key($base-base-fonts, $base-height){
+    $base-line-settings: map-get($base-base-fonts, $base-height);
+    $cleaned-font-family: str-replace(to-lower-case($font-family),' ','-');
+    @if map-has-key($base-line-settings,$cleaned-font-family){
+      $font-settings: map-get($base-line-settings,$cleaned-font-family);
+      @if map-has-key($font-settings, $font-size){
+        $size-settings: map-get($font-settings, $font-size);
+        @if map-has-key($size-settings, $lines){
+          @return map-get($size-settings, $lines);
+        } @else {
+          @return map-get($size-settings, 'd');
         }
-        @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
       }
+    }
+  }
+  @return 0 //No size found;
+}
 
-      ///////////////////////////////////////////
-        //
-        //  Rokkitt 
-        //
-        //  with a base-line-height of 26px
-        //
-        ///////////////////////////////////////////
-        @if $font-family == "Rokkitt" {
-          $shift:0;
-          @if $font-size == 12px {$shift:.4;}
-          @else if $font-size == 13px {$shift:.4;}
-          @else if $font-size == 14px {$shift:.4;}
-          @else if $font-size == 16px {$shift:.35;}
-          @else if $font-size == 18px {$shift:.35;} 
-          @else if $font-size == 20px {$shift:.32}
-          @else if $font-size == 22px {$shift:.3;}
-          @else if $font-size == 24px {$shift:.75;}
-          @else if $font-size == 26px {$shift:.75;}
-          @else if $font-size == 28px {$shift:.72;}
-          @else if $font-size == 30px {$shift:.72;}
-          @else if $font-size == 32px {$shift:.7;}
-          @else if $font-size == 34px {$shift:.7;}
-          @else if $font-size == 36px {$shift:.7;}
-          @else if $font-size == 38px {$shift:.65;}
-          @else if $font-size == 40px {$shift:.6;}
-          @else if $font-size == 48px {$shift:.5;}
-          @else if $font-size == 60px {$shift:.9;}
-          @else{
-            $font-size:$base-font-size;
-          }
-          @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-        }
+@function get-bottom-base(
+  $font-size: $base-font-size,
+  $font-family: $default-font-family,
+  $lines: lines-for-font-size($font-size)
+  ){
+  @return 1 - get-base($font-size, $font-family, $lines);
+}
 
-        ///////////////////////////////////////////
-          //
-          //  Droid Sans 
-          //
-          //  with a base-line-height of 26px
-          //
-          ///////////////////////////////////////////
-          @if $font-family == "Droid Sans" {
-            $shift:0;
-            @if $font-size == 12px {$shift:.35;}
-            @else if $font-size == 14px {$shift:.3;}
-            @else if $font-size == 16px {$shift:.3;}
-            @else if $font-size == 18px {$shift:.26;} 
-            @else if $font-size == 20px {$shift:.22;}
-            @else if $font-size == 22px {$shift:.22;}
-            @else if $font-size == 24px {$shift:.7;}
-            @else if $font-size == 26px {$shift:.64;}
-            @else if $font-size == 28px {$shift:.64;}
-            @else if $font-size == 30px {$shift:.59;}
-            @else if $font-size == 32px {$shift:.56;}
-            @else if $font-size == 34px {$shift:.52;}
-            @else if $font-size == 36px {$shift:.51;}
-            @else if $font-size == 38px {$shift:.48;}
-            @else if $font-size == 40px {$shift:.48;}
-            @else{
-              $font-size:$base-font-size;
-            }
-            @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-          }
-
-            ///////////////////////////////////////////
-            //
-            //  Open Sans 
-            //
-            //  with a base-line-height of 26px
-            //
-            ///////////////////////////////////////////
-            @if $font-family == "Open Sans" or $font-family == "open-sans" {
-              $shift:0;
-              @if $font-size == 12px {$shift:0.34;}
-              @else if $font-size == 13px {$shift:.32;}
-              @else if $font-size == 14px {$shift:.32;}
-              @else if $font-size == 16px {$shift:.25;}
-              @else if $font-size == 18px {$shift:.25;}
-              @else if $font-size == 20px {$shift:.22;}
-              @else if $font-size == 22px {$shift:.15;}
-              @else if $font-size == 24px {$shift:.65;}
-              @else if $font-size == 26px {$shift:.62;}
-              @else if $font-size == 28px {$shift:.57;}
-              @else if $font-size == 30px {$shift:.57;}
-              @else if $font-size == 32px {$shift:.53;}
-              @else if $font-size == 34px {$shift:.51;}
-              @else if $font-size == 36px {$shift:.48;}
-              @else if $font-size == 38px {$shift:.43;}
-              @else if $font-size == 40px {$shift:.41;}
-              @else if $font-size == 42px {$shift:.49;}
-              @else if $font-size == 44px {$shift:.44;}
-              @else if $font-size == 46px {$shift:.44;}
-              @else if $font-size == 48px {$shift:.41;}
-              @else if $font-size == 50px {$shift:.40;}
-              @else if $font-size == 52px {$shift:.32;}
-              @else if $font-size == 54px {$shift:.80;}
-              @else if $font-size == 56px {
-                @if $lines == 3 {$shift:.80;}
-                @else if $lines == 2{$shift: .22;}
-              }
-              @else if $font-size == 58px {$shift:.76;}
-              @else if $font-size == 60px {
-                @if $lines == 3 {$shift:.75;}
-                @else if $lines == 2{$shift: .18;}
-              }
-              @else{
-                $font-size:$base-font-size;
-              }
-              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-            }
-
-            ///////////////////////////////////////////
-            //
-            //  Georgia
-            //
-            //  with a base-line-height of 26px
-            //
-            ///////////////////////////////////////////
-            @if $font-family == "Georgia" {
-              $shift:0;
-              @if $font-size == 12px {$shift:.33;}
-              @else if $font-size == 13px {$shift:.31;}
-              @else if $font-size == 14px {$shift:.31;}
-              @else if $font-size == 16px {$shift:.30;}
-              @else if $font-size == 18px {
-                @if $lines == 1 {$shift:.27;}
-                @else if $lines == 2 {$shift: 0.77}
-              }
-              @else if $font-size == 20px {$shift:.22;}
-              @else if $font-size == 22px {$shift:.22;}
-              @else if $font-size == 24px {$shift:.68;}
-              @else if $font-size == 26px {$shift:.65;}
-              @else if $font-size == 28px {$shift:.63;}
-              @else if $font-size == 30px {$shift:.60;}
-              @else if $font-size == 32px {$shift:.58;}
-              @else if $font-size == 34px {$shift:.55;}
-              @else if $font-size == 36px {$shift:.53;}
-              @else if $font-size == 38px {$shift:.51;}
-              @else if $font-size == 40px {$shift:.48;}
-              @else if $font-size == 42px {$shift:.43;}
-              @else if $font-size == 44px {$shift:.41;}
-              @else if $font-size == 46px {$shift:.40;}
-              @else if $font-size == 48px {$shift:.40;}
-              @else if $font-size == 50px {$shift:.85;}
-              @else{
-                $font-size:$base-font-size;
-              }
-              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-            }
-
-            ///////////////////////////////////////////
-            //
-            //  Aktiv Grotesk
-            //
-            //  with a base-line-height of 26px
-            //
-            ///////////////////////////////////////////
-            @if $font-family == "aktiv-grotesk-std" {
-              $shift:0;
-              @if $font-size == 12px {$shift:.30;}
-              @else if $font-size == 11px {$shift:.30;}
-              @else if $font-size == 13px {$shift:.28;}
-              @else if $font-size == 14px {$shift:.28;}
-              @else if $font-size == 16px {$shift:.24;}
-              @else if $font-size == 18px {$shift:.21;}
-              @else if $font-size == 20px {$shift:.21;}
-              @else if $font-size == 22px {$shift:.21;}
-              @else if $font-size == 24px {
-                @if $lines == 2 {$shift:.65;}
-                @else if $lines == 1{$shift: .15;}
-              }
-              @else if $font-size == 26px {$shift:.60;}
-              @else if $font-size == 28px {$shift:.60;}
-              @else if $font-size == 30px {$shift:.58;}
-              @else if $font-size == 32px {$shift:.55;}
-              @else if $font-size == 34px {$shift:.51;}
-              @else if $font-size == 36px {$shift:.50;}
-              @else if $font-size == 38px {$shift:.42;}
-              @else if $font-size == 40px {$shift:.42;}
-              @else if $font-size == 48px {$shift:.27;}
-              @else if $font-size == 60px {$shift:.60;}
-              @else if $font-size == 96px {$shift:.51;}
-              @else{
-                $font-size:$base-font-size;
-              }
-              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-            }
-
-            ///////////////////////////////////////////
-            //
-            //  Jellyka Castles Queen Regular
-            //
-            //  with a base-line-height of 26px
-            //
-            ///////////////////////////////////////////
-            @if $font-family == "jellyka_castles_queenregular" { 
-              $shift:0;
-              @if $font-size == 12px {$shift:.4;}
-              @else if $font-size == 11px {$shift:.4;}
-              @else if $font-size == 13px {$shift:0;}
-              @else if $font-size == 14px {$shift:.4;}
-              @else if $font-size == 16px {$shift:.4;}
-              @else if $font-size == 18px {$shift:.35;}
-              @else if $font-size == 20px {$shift:.35;}
-              @else if $font-size == 22px {$shift:.35;}
-              @else if $font-size == 24px {$shift:.82;}
-              @else if $font-size == 26px {$shift:.82;}
-              @else if $font-size == 28px {$shift:.82;}
-              @else if $font-size == 30px {$shift:.80;}
-              @else if $font-size == 32px {$shift:.78;}
-              @else if $font-size == 34px {$shift:.78;}
-              @else if $font-size == 36px {$shift:.78;}
-              @else if $font-size == 38px {$shift:.78;}
-              @else if $font-size == 40px {$shift:.78;}
-              @else if $font-size == 48px {$shift:.78;}
-              @else if $font-size == 60px {$shift:0;}
-              @else if $font-size == 96px {$shift:.5;}
-              @else if $font-size == 128px {$shift:.3;}
-              @else{
-                $font-size:$base-font-size;
-              }
-              @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-            }
-            ///////////////////////////////////////////
-              //
-              //  Verdana 
-              //
-              //  with a base-line-height of 26px
-              //
-              ///////////////////////////////////////////
-              @if $font-family == "Verdana" {
-                $shift:0;
-                @if $font-size == 12px {$shift:.35;}
-                @else if $font-size == 13px {$shift:.30;}
-                @else if $font-size == 14px {$shift:.30;}
-                @else if $font-size == 16px {$shift:.25;}
-                @else if $font-size == 18px {$shift:.23;} 
-                @else if $font-size == 20px {$shift:.20;}
-                @else if $font-size == 22px {$shift:.20;}
-                @else if $font-size == 24px {$shift:.65;}
-                @else if $font-size == 26px {$shift:.60;}
-                @else if $font-size == 28px {$shift:.58;}
-                @else if $font-size == 30px {$shift:.53;}
-                @else if $font-size == 32px {$shift:.53;}
-                @else if $font-size == 34px {$shift:.50;}
-                @else if $font-size == 36px {$shift:.45;}
-                @else if $font-size == 38px {$shift:.43;}
-                @else if $font-size == 40px {$shift:.40;}
-                @else if $font-size == 42px {$shift:.40;}
-                @else if $font-size == 44px {$shift:.35;}
-                @else if $font-size == 46px {$shift:.32;}
-                @else if $font-size == 48px {$shift:.28;}
-                @else if $font-size == 50px {$shift:.73;}
-                @else{
-                  $font-size:$base-font-size;
-                }
-                @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-              }
-              ///////////////////////////////////////////
-                //
-                //  Arial 
-                //
-                //  with a base-line-height of 26px
-                //
-                ///////////////////////////////////////////
-                @if $font-family == "Arial" {
-                  $shift:0;
-                  @if $font-size == 12px {$shift:.33;}
-                  @else if $font-size == 13px {$shift:.33;}
-                  @else if $font-size == 14px {$shift:.3;}
-                  @else if $font-size == 16px {$shift:.3;}
-                  @else if $font-size == 18px {$shift:.26} 
-                  @else if $font-size == 20px {$shift:.23;}
-                  @else if $font-size == 22px {$shift:.23;}
-                  @else if $font-size == 24px {$shift:.70;}
-                  @else if $font-size == 26px {$shift:.67;}
-                  @else if $font-size == 28px {$shift:.67;}
-                  @else if $font-size == 30px {$shift:.60;}
-                  @else if $font-size == 32px {$shift:.58;}
-                  @else if $font-size == 34px {$shift:.55;}
-                  @else if $font-size == 36px {$shift:.55;}
-                  @else if $font-size == 38px {$shift:.50;}
-                  @else if $font-size == 40px {$shift:.45;}
-                  @else if $font-size == 42px {$shift:.45;}
-                  @else if $font-size == 44px {$shift:.42;}
-                  @else if $font-size == 46px {$shift:.40;}
-                  @else if $font-size == 48px {$shift:.36;}
-                  @else if $font-size == 50px {$shift:.85;}
-                  @else{
-                    $font-size:$base-font-size;
-                  }
-                  @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                }  
-                ///////////////////////////////////////////
-                  //
-                  //  Tahoma 
-                  //
-                  //  with a base-line-height of 26px
-                  //
-                  ///////////////////////////////////////////
-                  @if $font-family == "Tahoma" {
-                    $shift:0;
-                    @if $font-size == 12px {$shift:.30;}
-                    @else if $font-size == 13px {$shift:.30;}
-                    @else if $font-size == 14px {$shift:.30}
-                    @else if $font-size == 16px {$shift:.25}
-                    @else if $font-size == 18px {$shift:.25} 
-                    @else if $font-size == 20px {$shift:.18;}
-                    @else if $font-size == 22px {$shift:.18;}
-                    @else if $font-size == 24px {$shift:.65;}
-                    @else if $font-size == 26px {$shift:.60;}
-                    @else if $font-size == 28px {$shift:.58;}
-                    @else if $font-size == 30px {$shift:.55;}
-                    @else if $font-size == 32px {$shift:.55;}
-                    @else if $font-size == 34px {$shift:.49;}
-                    @else if $font-size == 36px {$shift:.45;}
-                    @else if $font-size == 38px {$shift:.43;}
-                    @else if $font-size == 40px {$shift:.40;}
-                    @else if $font-size == 42px {$shift:.40;}
-                    @else if $font-size == 44px {$shift:.35;}
-                    @else if $font-size == 46px {$shift:.28;}
-                    @else if $font-size == 48px {$shift:.28;}
-                    @else if $font-size == 50px {$shift:.70;}
-                    @else{
-                      $font-size:$base-font-size;
-                    }
-                    @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                  }
-                  ///////////////////////////////////////////
-                    //
-                    //  Merriweather 
-                    //
-                    //  with a base-line-height of 26px
-                    //
-                    ///////////////////////////////////////////
-                    @if $font-family == "Merriweather" {
-                      $shift:0;
-                      @if $font-size == 12px {$shift:.4;}
-                      @else if $font-size == 14px {$shift:.33}
-                      @else if $font-size == 16px {$shift:.32}
-                      @else if $font-size == 18px {$shift:.29} 
-                      @else if $font-size == 20px {$shift:.26;}
-                      @else if $font-size == 22px {$shift:.23;}
-                      @else if $font-size == 24px {
-                        @if $lines == 1{$shift:.22;}
-                        @else {$shift: .72;}
-                      }
-                      @else if $font-size == 26px {
-                        @if $lines == 1{$shift:.20;}
-                        @else {$shift: .70;}
-                      }
-                      @else if $font-size == 28px {
-                        @if $lines == 1{$shift:.20;}
-                        @else {$shift: .70;}
-                      }
-                      @else if $font-size == 30px {$shift:.67;}
-                      @else if $font-size == 32px {$shift:.62;}
-                      @else if $font-size == 34px {$shift:.61;}
-                      @else if $font-size == 36px {$shift:.58;}
-                      @else if $font-size == 38px {$shift:.55;}
-                      @else if $font-size == 40px {$shift:.55;}
-                      @else{
-                        $font-size:$base-font-size;
-                      }
-                      @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                    }  
-                  ///////////////////////////////////////////
-                    //
-                    //  Nothing You Could Do 
-                    //
-                    //  with a base-line-height of 26px
-                    //
-                    ///////////////////////////////////////////
-                    @if $font-family == "Nothing You Could Do" {
-                      $shift:0;
-                      @if $font-size == 12px {$shift:.37;}
-                      @else if $font-size == 14px {$shift:.37}
-                      @else if $font-size == 16px {$shift:.34}
-                      @else if $font-size == 18px {$shift:.31} 
-                      @else if $font-size == 20px {$shift:.30;}
-                      @else if $font-size == 22px {$shift:.27;}
-                      @else if $font-size == 24px {$shift:.75;}
-                      @else if $font-size == 26px {$shift:.72;}
-                      @else if $font-size == 28px {$shift:.73;}
-                      @else if $font-size == 30px {$shift:.71;}
-                      @else if $font-size == 32px {$shift:.70;}
-                      @else if $font-size == 34px {$shift:.70;}
-                      @else if $font-size == 36px {$shift:.66;}
-                      @else if $font-size == 38px {$shift:.65;}
-                      @else if $font-size == 40px {$shift:.65;}
-                      @else{
-                        $font-size:$base-font-size;
-                      }
-                      @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                    }
-                    ///////////////////////////////////////////
-                      //
-                      //  Oswald 
-                      //
-                      //  with a base-line-height of 26px
-                      //
-                      ///////////////////////////////////////////
-                      @if $font-family == "Oswald" {
-                        $shift:0;
-                        @if $font-size == 12px {$shift:.30;}
-                        @else if $font-size == 14px {$shift:.25}
-                        @else if $font-size == 16px {$shift:.22}
-                        @else if $font-size == 18px {$shift:.20} 
-                        @else if $font-size == 20px {$shift:.17;}
-                        @else if $font-size == 22px {$shift:.12;}
-                        @else if $font-size == 24px {$shift:.57;}
-                        @else if $font-size == 26px {$shift:.56;}
-                        @else if $font-size == 28px {$shift:.52;}
-                        @else if $font-size == 30px {$shift:.50;}
-                        @else if $font-size == 32px {$shift:.45;}
-                        @else if $font-size == 34px {$shift:.42;}
-                        @else if $font-size == 36px {$shift:.40;}
-                        @else if $font-size == 38px {$shift:.36;}
-                        @else if $font-size == 40px {$shift:.32;}
-                        @else{
-                          $font-size:$base-font-size;
-                        }
-                        @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                      }
-                      ///////////////////////////////////////////
-                        //
-                        //  Patua One 
-                        //
-                        //  with a base-line-height of 26px
-                        //
-                        ///////////////////////////////////////////
-                        @if $font-family == "Patua One" {
-                          $shift:0;
-                          @if $font-size == 12px {$shift:.33;}
-                          @else if $font-size == 14px {$shift:.31;}
-                          @else if $font-size == 16px {$shift:.28;}
-                          @else if $font-size == 18px {$shift:.26;} 
-                          @else if $font-size == 20px {$shift:.24;}
-                          @else if $font-size == 22px {$shift:.21;}
-                          @else if $font-size == 24px {$shift:.70;}
-                          @else if $font-size == 26px {$shift:.67;}
-                          @else if $font-size == 28px {$shift:.63;}
-                          @else if $font-size == 30px {$shift:.58;}
-                          @else if $font-size == 32px {$shift:.58;}
-                          @else if $font-size == 34px {$shift:.54;}
-                          @else if $font-size == 36px {$shift:.50;}
-                          @else if $font-size == 38px {$shift:.48;}
-                          @else if $font-size == 40px {$shift:.48;}
-                          @else{
-                            $font-size:$base-font-size;
-                          }
-                          @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                        }
-                        ///////////////////////////////////////////
-                          //
-                          //  Rokkitt
-                          //
-                          //  with a base-line-height of 26px
-                          //
-                          ///////////////////////////////////////////
-                          @if $font-family == "Rokkitt" {
-                            $shift:0;
-                            @if $font-size == 12px {$shift:.37;}
-                            @else if $font-size == 14px {$shift:.37;}
-                            @else if $font-size == 16px {$shift:.37;}
-                            @else if $font-size == 18px {$shift:.36;} 
-                            @else if $font-size == 20px {$shift:.36;}
-                            @else if $font-size == 22px {$shift:.31;}
-                            @else if $font-size == 24px {$shift:.81;}
-                            @else if $font-size == 26px {$shift:.78;}
-                            @else if $font-size == 28px {$shift:.75;}
-                            @else if $font-size == 30px {$shift:.73;}
-                            @else if $font-size == 32px {$shift:.72;}
-                            @else if $font-size == 34px {$shift:.70;}
-                            @else if $font-size == 36px {$shift:.70;}
-                            @else if $font-size == 38px {$shift:.66;}
-                            @else if $font-size == 40px {$shift:.66;}
-                            @else{
-                              $font-size:$base-font-size;
-                            }
-                            @include vertical-groove($shift, $spacing, $font-size, $base-font-size, $lines);
-                          }
+@mixin base-base(
+  $font-size: $base-font-size, 
+  $font-family: $default-font-family,
+  $trailer: lines-for-font-size($font-size), // Trailing white space control.
+  $leader: 0, //Leading white space control
+  $lines: lines-for-font-size($font-size), //Units of lineheight
+  $ffs: $fallback-font-stack
+){
+  $base_adjust: get-base($font-size, $font-family, $lines);
+  $font_adjust: ($base-font-size / $font-size);
+  $top_adjust: $base_adjust * $font_adjust;
+  padding-top: #{(($base_adjust + $leader) * $base-line-height) / $font-size}em;
+  margin-bottom: #{(($trailer - $base_adjust) * $base-line-height) / $font-size}em;
+  margin-top: 0;
+  padding-bottom: 0;
+  font-size: #{1 / $font_adjust}em;
+  line-height: $lines * $base-line-height;
+  font-family: $font-family, $ffs;
 }
