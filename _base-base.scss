@@ -3,11 +3,11 @@
 =====*/
 
 @function px2bl($px, $lh: $base-line-height){
-  @return $px/$base-line-height;
+  @return $px/$lh;
 }
 
 @function p2b($px, $lh: $base-line-height){
-  @return px2bl($px);
+  @return px2bl($px, $lh);
 }
 
 @import 'font-settings-12';
@@ -32,10 +32,11 @@ $base-base-fonts: (
   $font-size: $base-font-size,
   $adjust: false,
   $font-family: $default-font-family,
-  $line-height: lines-for-font-size($font-size)
+  $line-height: lines-for-font-size($font-size),
+  $lh: $base-line-height
   ){
   @if($adjust){
-    $lines: $lines + get-base($font-size,$font-family,$line-height);
+    $lines: $lines + get-base($font-size,$font-family,$line-height,$lh);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   padding-top: #{$adjustment}em;
@@ -46,10 +47,11 @@ $base-base-fonts: (
   $font-size: $base-font-size,
   $adjust: false,
   $font-family: $default-font-family,
-  $line-height: lines-for-font-size($font-size)
+  $line-height: lines-for-font-size($font-size),
+  $lh: $base-line-height
   ){
   @if($adjust){
-    $lines: $lines - get-base($font-size,$font-family,$line-height);
+    $lines: $lines - get-base($font-size,$font-family,$line-height,$lh);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   padding-bottom: #{$adjustment}em;
@@ -60,10 +62,11 @@ $base-base-fonts: (
   $font-size: $base-font-size,
   $adjust: false,
   $font-family: $default-font-family,
-  $line-height: lines-for-font-size($font-size)
+  $line-height: lines-for-font-size($font-size),
+  $lh: $base-line-height
   ){
   @if($adjust){
-    $lines: $lines + get-base($font-size,$font-family,$line-height);
+    $lines: $lines + get-base($font-size,$font-family,$line-height,$lh);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   margin-top: #{$adjustment}em;
@@ -74,19 +77,20 @@ $base-base-fonts: (
   $font-size: $base-font-size,
   $adjust: false,
   $font-family: $default-font-family,
-  $line-height: lines-for-font-size($font-size)
+  $line-height: lines-for-font-size($font-size),
+  $lh: $base-line-height
   ){
   @if($adjust){
-    $lines: $lines - get-base($font-size,$font-family,$line-height);
+    $lines: $lines - get-base($font-size,$font-family,$line-height,$lh);
   }
   $adjustment: $lines * $base-line-height / $font-size;
   margin-bottom: #{$adjustment}em;
 };
 
-@mixin neutralise(){
+@mixin neutralise($lh: $base-line-height){
   font-family: $default-font-family, $fallback-font-stack;
   font-size: $base-font-size;
-  line-height: $base-line-height;
+  line-height: $lh;
   margin:{
     top: 0;
     bottom: 0;
@@ -162,7 +166,7 @@ $base-base-fonts: (
   @if not $lines{
     $lines: lines-for-font-size($font-size, $lh);
   }
-  $base_adjust: get-base($font-size, $font-family, $lines);
+  $base_adjust: get-base($font-size, $font-family, $lines, $lh);
   $font_adjust: ($base-font-size / $font-size);
   $top_adjust: $base_adjust * $font_adjust;
   padding-top: #{(($base_adjust + $leader) * $lh) / $font-size}em;
