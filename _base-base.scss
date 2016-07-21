@@ -2,17 +2,19 @@
 @mixins
 =====*/
 
-@function px2bl($px){
+@function px2bl($px, $lh: $base-line-height){
   @return $px/$base-line-height;
 }
 
-@function p2b($px){
+@function p2b($px, $lh: $base-line-height){
   @return px2bl($px);
 }
 
+@import 'font-settings-12';
 @import 'font-settings-14';
 @import 'font-settings-16';
 $base-base-fonts: (
+  12px: $base-base-fonts-12,
   14px: $base-base-fonts-14,
   16px: $base-base-fonts-16
 );
@@ -107,11 +109,9 @@ $base-base-fonts: (
   @return $lines;
 }
 
-@mixin establish-baseline($font-size: $base-font-size) {
-  html {
+@mixin establish-baseline($font-size: $base-font-size, $lh: $base-line-height) {
     font-size: $font-size;
-    line-height: lines-for-font-size($font-size) * $base-line-height;
-  }
+    line-height: lines-for-font-size($font-size) * $lh;
 }
 
 
