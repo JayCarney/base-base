@@ -13,6 +13,7 @@
 @import 'font-settings-12';
 @import 'font-settings-14';
 @import 'font-settings-16';
+
 $base-base-fonts: (
   12px: $base-base-fonts-12,
   14px: $base-base-fonts-14,
@@ -38,7 +39,7 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines + get-base($font-size,$font-family,$line-height,$lh);
   }
-  $adjustment: $lines * $base-line-height / $font-size;
+  $adjustment: $lines * $lh / $font-size;
   padding-top: #{$adjustment}em;
 };
 
@@ -53,7 +54,7 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines - get-base($font-size,$font-family,$line-height,$lh);
   }
-  $adjustment: $lines * $base-line-height / $font-size;
+  $adjustment: $lines * $lh / $font-size;
   padding-bottom: #{$adjustment}em;
 };
 
@@ -68,7 +69,7 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines + get-base($font-size,$font-family,$line-height,$lh);
   }
-  $adjustment: $lines * $base-line-height / $font-size;
+  $adjustment: $lines * $lh / $font-size;
   margin-top: #{$adjustment}em;
 };
 
@@ -83,7 +84,7 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines - get-base($font-size,$font-family,$line-height,$lh);
   }
-  $adjustment: $lines * $base-line-height / $font-size;
+  $adjustment: $lines * $lh / $font-size;
   margin-bottom: #{$adjustment}em;
 };
 
