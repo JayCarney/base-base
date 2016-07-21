@@ -173,3 +173,25 @@ $base-base-fonts: (
   line-height: $lines * $lh;
   font-family: $font-family, $ffs;
 }
+
+@mixin debug_baseline($pseudo:false, $lh: $base-line-height){
+  @if $visual-grid == true or $visual-grid == yes {
+    @if $pseudo == false {
+      @include background-image(linear-gradient(to top, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%));
+      background-size: 100% $lh;
+      background-position: left top;
+    } @else {
+      position: relative;
+      &:after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        @include debug_baseline($lh: $lh);
+      }
+    }
+  }
+}
