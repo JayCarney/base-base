@@ -96,11 +96,12 @@ $base-base-fonts: (
 }
 
 @function lines-for-font-size(
-  $font-size: $base-font-size
+  $font-size: $base-font-size,
+  $lh: $base-line-height
   ){
   $min-line-padding: 2px;
   $lines: ceil($font-size / $base-line-height);
-  @if($lines * $base-line-height - $font-size < $min-line-padding * 2){
+  @if($lines * $lh - $font-size < $min-line-padding * 2){
     $lines: $lines + 1;
   }
   @return $lines;
@@ -149,19 +150,26 @@ $base-base-fonts: (
 @mixin base-base(
   $font-size: $base-font-size, 
   $font-family: $default-font-family,
-  $trailer: lines-for-font-size($font-size), // Trailing white space control.
+  $trailer: null, // Trailing white space control.
   $leader: 0, //Leading white space control
-  $lines: lines-for-font-size($font-size), //Units of lineheight
-  $ffs: $fallback-font-stack
+  $lines: null, //Units of lineheight
+  $ffs: $fallback-font-stack,
+  $lh: $base-line-height
 ){
+  @if not $trailer{
+    $trailer: lines-for-font-size($font-size, $lh);
+  }
+  @if not $lines{
+    $lines: lines-for-font-size($font-size, $lh);
+  }
   $base_adjust: get-base($font-size, $font-family, $lines);
   $font_adjust: ($base-font-size / $font-size);
   $top_adjust: $base_adjust * $font_adjust;
-  padding-top: #{(($base_adjust + $leader) * $base-line-height) / $font-size}em;
-  margin-bottom: #{(($trailer - $base_adjust) * $base-line-height) / $font-size}em;
+  padding-top: #{(($base_adjust + $leader) * $lh) / $font-size}em;
+  margin-bottom: #{(($trailer - $base_adjust) * $lh) / $font-size}em;
   margin-top: 0;
   padding-bottom: 0;
   font-size: #{1 / $font_adjust}em;
-  line-height: $lines * $base-line-height;
+  line-height: $lines * $lh;
   font-family: $font-family, $ffs;
 }
