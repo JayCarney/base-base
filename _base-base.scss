@@ -123,10 +123,10 @@ $base-base-fonts: (
   $font-size: $base-font-size,
   $font-family: $default-font-family,
   $lines: lines-for-font-size($font-size),
-  $base-height: $base-line-height
+  $lh: $base-line-height
   ){
-  @if map-has-key($base-base-fonts, $base-height){
-    $base-line-settings: map-get($base-base-fonts, $base-height);
+  @if map-has-key($base-base-fonts, $lh){
+    $base-line-settings: map-get($base-base-fonts, $lh);
     $cleaned-font-family: str-replace(to-lower-case($font-family),' ','-');
     @if map-has-key($base-line-settings,$cleaned-font-family){
       $font-settings: map-get($base-line-settings,$cleaned-font-family);
@@ -146,9 +146,10 @@ $base-base-fonts: (
 @function get-bottom-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $lines: lines-for-font-size($font-size)
+  $lines: lines-for-font-size($font-size),
+  $lh: $base-line-height
   ){
-  @return 1 - get-base($font-size, $font-family, $lines);
+  @return 1 - get-base($font-size, $font-family, $lines, $lh);
 }
 
 @mixin base-base(
