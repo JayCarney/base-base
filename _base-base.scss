@@ -180,19 +180,19 @@ $base-base-fonts: (
   font-family: $font-family, $ffs;
 }
 
-@mixin debug_baseline($pseudo:false, $lh: $base-line-height){
+@mixin debug_baseline($pseudo:false, $lh:$base-line-height, $offset:0px){
   @if $visual-grid == true or $visual-grid == yes {
     @if $pseudo == false {
       @include background-image(linear-gradient(to top, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%));
       background-size: 100% $lh;
-      background-position: left top;
+      background-position: left $offset;
     } @else {
       position: relative;
       &:after{
         content: '';
         display: block;
         position: absolute;
-        top: 0;
+        top: $offset;
         left: 0;
         right: 0;
         bottom: 0;
