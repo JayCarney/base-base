@@ -132,7 +132,7 @@ $base-base-fonts: (
   $weight: null
   ){
   $original-font-family: $font-family;
-  @if $weight == 'normal'{
+  @if $weight == 'normal' or $weight == 400{
     $weight: null;
   }
   @if $weight != null {
