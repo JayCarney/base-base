@@ -54,7 +54,7 @@ $base-base-fonts: (
   $weight: null
   ){
   @if($adjust){
-    $lines: $lines + get-base($font-size,$font-family,$line-height,$lh,$weight);
+    $lines: $lines - get-base($font-size,$font-family,$line-height,$lh,$weight);
   }
   $adjustment: $lines * $lh / $font-size;
   padding-bottom: #{$adjustment}em;
@@ -86,7 +86,7 @@ $base-base-fonts: (
   $weight: null
   ){
   @if($adjust){
-    $lines: $lines + get-base($font-size,$font-family,$line-height,$lh,$weight);
+    $lines: $lines - get-base($font-size,$font-family,$line-height,$lh,$weight);
   }
   $adjustment: $lines * $lh / $font-size;
   margin-bottom: #{$adjustment}em;
