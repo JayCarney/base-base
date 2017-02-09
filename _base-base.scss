@@ -157,6 +157,12 @@ $base-base-fonts: (
           @return get-base($font-size, $original-font-family, $lines, $lh, null);
         }
       }
+    } @else {
+      // no font family exists
+      @if $weight != null {
+        // return the "normal" variant of this font instead
+        @return get-base($font-size, $original-font-family, $lines, $lh, null);
+      }
     }
   }
   @return 0 //No size found;
