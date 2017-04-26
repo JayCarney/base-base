@@ -367,7 +367,7 @@ $base-base-fonts-16: (
   'montserrat': (
     12px:('d':p2b(4px,$lh)),
     14px:('d':p2b(11px,$lh)),
-    16px:('d':p2b(11px,$lh)),
+    16px:('d':p2b(11px,$lh), 1:p2b(3px,$lh)),
     18px:('d':p2b(10px,$lh)),
     20px:('d':p2b(9px,$lh)),
     22px:('d':p2b(9px,$lh)),
