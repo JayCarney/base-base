@@ -404,7 +404,7 @@ $base-base-fonts-16: (
       42px:('d':p2b(10px,$lh)),
       44px:('d':p2b(10px,$lh)),
       46px:('d':p2b(1px,$lh)),
-      48px:('d':p2b(0px,$lh)),
+      48px:('d':p2b(0px,$lh), 3:p2b(8px,$lh)),
       50px:('d':p2b(0px,$lh))
     )
   );
