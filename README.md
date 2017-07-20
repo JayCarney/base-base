@@ -6,7 +6,7 @@ base-base is a sass mix-in which stores all your base-line adjustments for fonts
 
 ### Dependances
 
-None! Aside from Sass
+None! (aside from Sass)
 
 #### Configuration Variables
 
