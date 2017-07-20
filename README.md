@@ -2,11 +2,14 @@
 
 base-base is a sass mix-in which stores all your base-line adjustments for fonts so you don't have to re-create them.
 
+[Base-Base Documentation](http://dashmedia.github.io/base-base/) generated with [sassdoc](http://sassdoc.com/)
+
 ### Dependances
 
 None! Aside from Sass
 
-Configuration Variables:
+#### Configuration Variables
+
 ```scss
 $fallback-font-stack: Helvetica, Arial, Sans-Serif !default;
 $default-font-family: "Open Sans" !default;
@@ -17,7 +20,9 @@ $base-base-unit: rem !default;
 ```
 
 ### Adding new fonts
+
 Example font-face boilerplate within the base-base mixin (view \_font-settings-16.scss for an example)
+
 ```scss
 $lh: 16px;
 $base-base-fonts-16: (
@@ -42,7 +47,9 @@ $base-base-fonts-16: (
   )
 )
 ```
+
 Example font size with different number of lines (line heights)
+
 ```scss
 'adelle': (
   // ... more sizes
