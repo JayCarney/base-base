@@ -1,18 +1,19 @@
 base-base.scss
 =========
 
-base-base is a compass mix-in which stores all your base-line adjustments for fonts so you don't have to re-create them
+base-base is a sass mix-in which stores all your base-line adjustments for fonts so you don't have to re-create them.
 
-##Dependances
-Requires Compass vertical rhythm and all the variables that go along with it.
+## Dependances
 
-Extra Variables required:
+None! Aside from Sass
+
+Configuration Variables:
 ```
 $fallback-font-stack: Helvetica, Arial, Sans-Serif;
 $default-font-family: "Proxima Nova";
 ```
 
-##Adding new fonts
+## Adding new fonts
 Example font-face boilerplate within the base-base mixin
 ```
 $base-base-fonts: (
@@ -40,7 +41,7 @@ Example font size with different number of lines (line heights)
 ..more font sizes..
 ```
 
-##Usage
+## Usage
 ```
 $trailer = Number of Rhythm units of trailing white-space
 $leader = Number of Rhythm units of leading white-space
@@ -55,7 +56,7 @@ note that only the font-size is required, there are defaults and fallbacks for t
 
 p{
 	@include base-base(16px); //default font used, rhythm units calulated
-							  //based on font size, one line of spaing 
+							  //based on font size, one line of spaing
 							  //added
 }
 p.big{
