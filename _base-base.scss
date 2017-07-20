@@ -2,10 +2,19 @@
 @mixins
 =====*/
 
+/**
+ * Convert pixels to baseline values
+ * @param  $px Pixel value to convert
+ * @param  $lh Baseline height
+ * @return baselines Number of baselines this pixel value represents
+ */
 @function px2bl($px, $lh: $base-line-height){
   @return $px/$lh;
 }
 
+/**
+ * Shorthand mixin for px2bl
+ */
 @function p2b($px, $lh: $base-line-height){
   @return px2bl($px, $lh);
 }
@@ -19,7 +28,13 @@ $base-base-fonts: (
   14px: $base-base-fonts-14,
   16px: $base-base-fonts-16
 );
-
+/**
+ * string replace function, used within base-base
+ * @param  $string Original string
+ * @param  $search Needle to find
+ * @param  $replace Value to replace with
+ * @return string New string with changes made
+ */
 @function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
   @if $index {
@@ -28,6 +43,15 @@ $base-base-fonts: (
   @return $string;
 }
 
+/**
+ * add $lines of padding to start of this item
+ * @param  $lines Number of baselines of padding to add
+ * @param  $font-size Font size of this item
+ * @param  $adjust Add baseline adjustments from base-base font database (useful for working with text)
+ * @param  $font-family Font familty used for baseline adjustments from database (only used when adjust set to true)
+ * @param $line-height Line height used when checking for baseline adjustments (only used when adjust set to true)
+ * @param $weight Font weight used when checking for baseline adjustments (only used when adjust set to true)
+ */
 @mixin padding-leader(
   $lines: 1,
   $font-size: $base-font-size,
@@ -44,6 +68,15 @@ $base-base-fonts: (
   padding-top: #{$adjustment}em;
 };
 
+/**
+ * add $lines of padding to end of this item
+ * @param  $lines Number of baselines of padding to add
+ * @param  $font-size Font size of this item
+ * @param  $adjust Add baseline adjustments from base-base font database (useful for working with text)
+ * @param  $font-family Font familty used for baseline adjustments from database (only used when adjust set to true)
+ * @param $line-height Line height used when checking for baseline adjustments (only used when adjust set to true)
+ * @param $weight Font weight used when checking for baseline adjustments (only used when adjust set to true)
+ */
 @mixin padding-trailer(
   $lines: 1,
   $font-size: $base-font-size,
@@ -60,6 +93,15 @@ $base-base-fonts: (
   padding-bottom: #{$adjustment}em;
 };
 
+/**
+ * add $lines of margin to start of this item
+ * @param  $lines Number of baselines of margin to add
+ * @param  $font-size Font size of this item
+ * @param  $adjust Add baseline adjustments from base-base font database (useful for working with text)
+ * @param  $font-family Font familty used for baseline adjustments from database (only used when adjust set to true)
+ * @param $line-height Line height used when checking for baseline adjustments (only used when adjust set to true)
+ * @param $weight Font weight used when checking for baseline adjustments (only used when adjust set to true)
+ */
 @mixin margin-leader(
   $lines: 1,
   $font-size: $base-font-size,
@@ -76,6 +118,15 @@ $base-base-fonts: (
   margin-top: #{$adjustment}em;
 };
 
+/**
+ * add $lines of margin to end of this item
+ * @param  $lines Number of baselines of margin to add
+ * @param  $font-size Font size of this item
+ * @param  $adjust Add baseline adjustments from base-base font database (useful for working with text)
+ * @param  $font-family Font familty used for baseline adjustments from database (only used when adjust set to true)
+ * @param $line-height Line height used when checking for baseline adjustments (only used when adjust set to true)
+ * @param $weight Font weight used when checking for baseline adjustments (only used when adjust set to true)
+ */
 @mixin margin-trailer(
   $lines: 1,
   $font-size: $base-font-size,
@@ -92,6 +143,10 @@ $base-base-fonts: (
   margin-bottom: #{$adjustment}em;
 };
 
+/**
+ * remove vertical margin and padding, reset font sizes etc to default
+ * @param  $lh Base line height to set this item to
+ */
 @mixin neutralise($lh: $base-line-height){
   font-family: $default-font-family, $fallback-font-stack;
   font-size: $base-font-size;
@@ -106,6 +161,11 @@ $base-base-fonts: (
   }
 }
 
+/**
+ * return baselines nessasary for this font size given a minimum padding of 2px
+ * @param  $font-size Font size to check
+ * @param  $lh Base line height
+ */
 @function lines-for-font-size(
   $font-size: $base-font-size,
   $lh: $base-line-height
@@ -118,11 +178,23 @@ $base-base-fonts: (
   @return $lines;
 }
 
+/**
+ * Establish default font size and line-height of an item
+ * @param  $font-size Base font size
+ * @param  $lh Base line height
+ */
 @mixin establish-baseline($font-size: $base-font-size, $lh: $base-line-height) {
     font-size: $font-size;
     line-height: lines-for-font-size($font-size) * $lh;
 }
-
+/**
+ * return leading baselines of adjustment from base-base database for the given font settings
+ * @param  $font-size Font size
+ * @param  $font-family Font family
+ * @param  $lines Number of baselines to use for line-height
+ * @param  $lh Baseline height
+ * @param  $weight Font weight
+ */
 
 @function get-base(
   $font-size: $base-font-size,
@@ -168,6 +240,14 @@ $base-base-fonts: (
   @return 0 //No size found;
 }
 
+/**
+ * return trailing baselines of adjustment from base-base database for the given font settings
+ * @param  $font-size Font size
+ * @param  $font-family Font family
+ * @param  $lines Number of baselines to use for line-height
+ * @param  $lh Baseline height
+ * @param  $weight Font weight
+ */
 @function get-bottom-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
@@ -178,6 +258,17 @@ $base-base-fonts: (
   @return 1 - get-base($font-size, $font-family, $lines, $lh, $weight);
 }
 
+/**
+ * return baselines of adjustment from base-base database for the given font settings
+ * @param  $font-size Font size
+ * @param  $font-family Font family
+ * @param  $trailer Trailing baselines of whitespace
+ * @param  $leader Leading baselines of whitespace
+ * @param  $lines Number of baselines to use for line-height
+ * @param  $ffs Fallback font stack
+ * @param  $lh Baseline height
+ * @param  $weight Font weight
+ */
 @mixin base-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
@@ -206,6 +297,12 @@ $base-base-fonts: (
   font-family: $font-family, $ffs;
 }
 
+/**
+ * Set the background of an item to a debug grid
+ * @param  $pseudo Use a pseudo element instead of this item
+ * @param  $lh Baseline height
+ * @param  $offset Grid offset
+ */
 @mixin debug_baseline($pseudo:false, $lh:$base-line-height, $offset:0px){
   @if $visual-grid == true or $visual-grid == yes {
     @if $pseudo == false {
