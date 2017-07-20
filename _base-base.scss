@@ -1,6 +1,12 @@
-/*=====
-@mixins
-=====*/
+$fallback-font-stack: Helvetica, Arial, Sans-Serif !default;
+$default-font-family: "Open Sans" !default;
+$base-line-height: 16px !default;
+$base-font-size: 16px !default;
+$base-use-rem: true !default;
+$base-base-unit: rem !default;
+@if not $base-use-rem{
+  $base-base-unit: em;
+}
 
 /**
  * Convert pixels to baseline values
@@ -64,8 +70,11 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines + get-base($font-size,$font-family,$line-height,$lh,$weight);
   }
+  @if $base-use-rem{
+    $font-size: $base-font-size;
+  }
   $adjustment: $lines * $lh / $font-size;
-  padding-top: #{$adjustment}em;
+  padding-top: #{$adjustment}#{$base-base-unit};
 };
 
 /**
@@ -89,8 +98,11 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines - get-base($font-size,$font-family,$line-height,$lh,$weight);
   }
+  @if $base-use-rem{
+    $font-size: $base-font-size;
+  }
   $adjustment: $lines * $lh / $font-size;
-  padding-bottom: #{$adjustment}em;
+  padding-bottom: #{$adjustment}#{$base-base-unit};
 };
 
 /**
@@ -114,8 +126,11 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines + get-base($font-size,$font-family,$line-height,$lh,$weight);
   }
+  @if $base-use-rem{
+    $font-size: $base-font-size;
+  }
   $adjustment: $lines * $lh / $font-size;
-  margin-top: #{$adjustment}em;
+  margin-top: #{$adjustment}#{$base-base-unit};
 };
 
 /**
@@ -139,8 +154,11 @@ $base-base-fonts: (
   @if($adjust){
     $lines: $lines - get-base($font-size,$font-family,$line-height,$lh,$weight);
   }
+  @if $base-use-rem{
+    $font-size: $base-font-size;
+  }
   $adjustment: $lines * $lh / $font-size;
-  margin-bottom: #{$adjustment}em;
+  margin-bottom: #{$adjustment}#{$base-base-unit};
 };
 
 /**
@@ -149,7 +167,11 @@ $base-base-fonts: (
  */
 @mixin neutralise($lh: $base-line-height){
   font-family: $default-font-family, $fallback-font-stack;
-  font-size: $base-font-size;
+  @if $base-use-rem {
+    font-size: 1rem;
+  } @else {
+    font-size: $base-font-size;
+  }
   line-height: $lh;
   margin:{
     top: 0;
@@ -187,6 +209,7 @@ $base-base-fonts: (
     font-size: $font-size;
     line-height: lines-for-font-size($font-size) * $lh;
 }
+
 /**
  * return leading baselines of adjustment from base-base database for the given font settings
  * @param  $font-size Font size
@@ -195,7 +218,6 @@ $base-base-fonts: (
  * @param  $lh Baseline height
  * @param  $weight Font weight
  */
-
 @function get-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
@@ -288,13 +310,17 @@ $base-base-fonts: (
   $base_adjust: get-base($font-size, $font-family, $lines, $lh, $weight);
   $font_adjust: ($base-font-size / $font-size);
   $top_adjust: $base_adjust * $font_adjust;
-  padding-top: #{(($base_adjust + $leader) * $lh) / $font-size}em;
-  margin-bottom: #{(($trailer - $base_adjust) * $lh) / $font-size}em;
+  @if $base-use-rem {
+    $top_adjust: $base_adjust;
+  }
+  @include padding-leader($leader, $font-size, true, $font-family, $lines, $lh, $weight);
+  @include margin-trailer($trailer, $font-size, true, $font-family, $lines, $lh, $weight);
   margin-top: 0;
   padding-bottom: 0;
-  font-size: #{1 / $font_adjust}em;
+  font-size: #{1 / $font_adjust}#{$base-base-unit};
   line-height: $lines * $lh;
   font-family: $font-family, $ffs;
+  font-weight: $weight;
 }
 
 /**
