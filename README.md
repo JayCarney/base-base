@@ -21,7 +21,9 @@ $base-base-unit: rem !default;
 
 ### Adding new fonts
 
-Example font-face boilerplate within the base-base mixin (view \_font-settings-16.scss for an example)
+The default lines for a given font size is assigned as `d` where as specific adjustments for other line-heights can be added with an integer for the given base lines.
+
+Example font-face settings (view `\_font-settings-16.scss` for real fonts)
 
 ```scss
 $lh: 16px;
@@ -51,9 +53,11 @@ $base-base-fonts-16: (
 Example font size with different number of lines (line heights)
 
 ```scss
-'adelle': (
-  // ... more sizes
-  16px:('d':p2b(11px,$lh), 1:p2b(3px,$lh)),
-  // ... more sizes
+$base-base-fonts-16: (
+  'adelle': (
+    // ... more sizes
+    16px:('d':p2b(11px,$lh), 1:p2b(3px,$lh)),
+    // ... more sizes
+    )
   )
 ```
