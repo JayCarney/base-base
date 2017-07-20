@@ -23,7 +23,7 @@ $base-base-unit: rem !default;
 
 The default lines for a given font size is assigned as `d` where as specific adjustments for other line-heights can be added with an integer for the given base lines.
 
-Example font-face settings (view `\_font-settings-16.scss` for real fonts)
+Example font-face settings (view `_font-settings-16.scss` for real fonts)
 
 ```scss
 $lh: 16px;
