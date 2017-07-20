@@ -1,0 +1,23 @@
+{
+  "name": "base-base",
+  "version": "1.0.0",
+  "description": "base-base.scss =========",
+  "main": "_base-base.scss",
+  "devDependencies": {
+    "sassdoc": "^2.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "node ./node_modules/.bin/sassdoc . --config ./sassdoc.config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://JayCarney@github.com/DashMedia/base-base.git"
+  },
+  "author": "Jason Carney",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DashMedia/base-base/issues"
+  },
+  "homepage": "https://github.com/DashMedia/base-base#readme"
+}

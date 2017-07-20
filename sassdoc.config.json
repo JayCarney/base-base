@@ -1,0 +1,7 @@
+{
+  "display": {
+    "alias": true
+  },
+  "dest": "./docs",
+  "descriptionPath": "README.md"
+}
