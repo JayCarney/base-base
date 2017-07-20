@@ -1,8 +1,25 @@
 ## Base-Base
 
+Vertical rhythm on fonts is no longer (or at least a little less) painful!
+
 base-base is a sass mix-in which stores all your base-line adjustments for fonts so you don't have to re-create them.
 
 [Base-Base Documentation](http://dashmedia.github.io/base-base/) generated with [sassdoc](http://sassdoc.com/)
+
+```scss
+p{
+  // You write this
+  @include base-base(24px, "Open Sans", 2);
+  // And get this
+  padding-top: 0.5625rem;
+  margin-bottom: 1.4375rem;
+  margin-top: 0;
+  padding-bottom: 0;
+  font-size: 1.5rem;
+  line-height: 32px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+}
+```
 
 ### Dependances
 
