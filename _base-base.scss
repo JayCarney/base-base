@@ -224,7 +224,7 @@ $base-base-fonts: (
   $font-family: $default-font-family,
   $lines: lines-for-font-size($font-size),
   $lh: $base-line-height,
-  $weight: 400
+  $weight: null
   ){
   $original-font-family: $font-family;
   @if $weight == 'normal' or $weight == 400{
@@ -308,7 +308,7 @@ $base-base-fonts: (
   $lines: null, //Units of lineheight
   $ffs: $fallback-font-stack,
   $lh: $base-line-height,
-  $weight: 400 //optional weight variant
+  $weight: null //optional weight variant
 ){
   @if not $trailer{
     $trailer: lines-for-font-size($font-size, $lh);
@@ -329,7 +329,9 @@ $base-base-fonts: (
   font-size: #{1 / $font_adjust}#{$base-base-unit};
   line-height: $lines * $lh;
   font-family: $font-family, $ffs;
-  font-weight: $weight;
+  @if $weight != null {
+    font-weight: $weight;
+  }
 }
 
 ///
