@@ -354,6 +354,10 @@ $base-base-fonts: (
       background-position: left $offset;
     } @else {
       position: relative;
+      > * {
+        position: relative;
+        z-index: 1;
+      }
       &:after{
         content: '';
         display: block;
@@ -363,6 +367,8 @@ $base-base-fonts: (
         right: 0;
         bottom: 0;
         @include debug_baseline($lh: $lh);
+        pointer-events: none;
+        z-index: 0;
       }
     }
   }
