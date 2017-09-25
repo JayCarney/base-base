@@ -10,6 +10,7 @@ $base-base-unit: rem !default;
 
 ///
 /// Convert pixels to baseline values
+/// @group Base-Base
 /// @param  {Pixels} $px Font size
 /// @param  {Pixels} $lh [$base-line-height] Base line height
 /// @return {float} Number of base lines this pixel value represents
@@ -19,6 +20,7 @@ $base-base-unit: rem !default;
 }
 
 /// @alias px2bl
+/// @group Base-Base
 @function p2b($px, $lh: $base-line-height){
   @return px2bl($px, $lh);
 }
@@ -35,6 +37,7 @@ $base-base-fonts: (
 ///
 /// string replace function, used within base-base
 /// @access private
+/// @group Base-Base
 /// @param  $string Original string
 /// @param  $search Needle to find
 /// @param  $replace Value to replace with
@@ -50,6 +53,7 @@ $base-base-fonts: (
 
 ///
 /// add $lines of padding to start of this item
+/// @group Base-Base
 /// @param $lines [1] Number of baselines of padding to add
 /// @param $font-size [$base-font-size] Font size of this item
 /// @param $adjust [false] Add baseline adjustments from base-base font database (useful for working with text)
@@ -78,6 +82,7 @@ $base-base-fonts: (
 
 ///
 /// add $lines of padding to end of this item
+/// @group Base-Base
 /// @param $lines [1] Number of baselines of padding to add
 /// @param $font-size [$base-font-size] Font size of this item
 /// @param $adjust [false] Add baseline adjustments from base-base font database (useful for working with text)
@@ -106,6 +111,7 @@ $base-base-fonts: (
 
 ///
 /// add $lines of margin to start of this item
+/// @group Base-Base
 /// @param $lines [1] Number of baselines of margin to add
 /// @param $font-size [$base-font-size] Font size of this item
 /// @param $adjust [false] Add baseline adjustments from base-base font database (useful for working with text)
@@ -134,6 +140,7 @@ $base-base-fonts: (
 
 ///
 /// add $lines of margin to end of this item
+/// @group Base-Base
 /// @param $lines [1] Number of baselines of margin to add
 /// @param $font-size [$base-font-size] Font size of this item
 /// @param $adjust [false] Add baseline adjustments from base-base font database (useful for working with text)
@@ -162,6 +169,7 @@ $base-base-fonts: (
 
 ///
 /// remove vertical margin and padding, reset font sizes etc to default
+/// @group Base-Base
 /// @param  $lh [$base-line-height] Base line height to set this item to
 ///
 @mixin neutralise($lh: $base-line-height){
@@ -185,6 +193,7 @@ $base-base-fonts: (
 ///
 /// returns baselines nessasary for this font size given a minimum padding of 2px
 /// @access private
+/// @group Base-Base
 /// @param  $font-size [$base-font-size] Font size to check
 /// @param  $lh [$base-line-height] Base line height
 ///
@@ -202,6 +211,7 @@ $base-base-fonts: (
 
 ///
 /// Establish default font size and line-height of an item
+/// @group Base-Base
 /// @param  $font-size [$base-font-size] Base font size
 /// @param  $lh [$base-line-height] Base line height
 ///
@@ -212,6 +222,7 @@ $base-base-fonts: (
 
 ///
 /// returns leading baselines of adjustment from base-base database for the given font settings
+/// @group Base-Base
 /// @access private
 /// @param  $font-size [$base-font-size] Font size
 /// @param  $font-family [$default-font-family] Font family
@@ -265,6 +276,7 @@ $base-base-fonts: (
 
 ///
 /// returns trailing baselines of adjustment from base-base database for the given font settings
+/// @group Base-Base
 /// @access private
 /// @param  $font-size [$base-font-size] Font size
 /// @param  $font-family [$default-font-family] Font family
@@ -284,6 +296,7 @@ $base-base-fonts: (
 
 ///
 /// returns baselines of adjustment from base-base database for the given font settings
+/// @group Base-Base
 /// @example
 ///   .example_text {
 ///     // all options
@@ -336,6 +349,7 @@ $base-base-fonts: (
 
 ///
 /// Set the background of an item to a debug grid
+/// @group Base-Base
 /// @example
 ///   .item{
 ///     @include debug_baseline(true, 16px, 0px);
