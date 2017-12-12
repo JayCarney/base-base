@@ -280,7 +280,7 @@ $base-base-fonts-16: (
     50px:('d':p2b(15px,$lh)),
     52px:('d':p2b(15px,$lh)),
     54px:('d':p2b(14px,$lh)),
-    56px:('d':p2b(12px,$lh)),
+    56px:('d':p2b(11px,$lh)),
     58px:('d':p2b(12px,$lh)),
     60px:('d':p2b(12px,$lh)),
     62px:('d':p2b(3px,$lh)),
@@ -448,7 +448,7 @@ $base-base-fonts-16: (
     'program': (
       12px:('d':p2b(5px,$lh)),
       14px:('d':p2b(12px,$lh)),
-      16px:('d':p2b(12px,$lh)),
+      16px:('d':p2b(11px,$lh)),
       18px:('d':p2b(11px,$lh)),
       20px:('d':p2b(11px,$lh)),
       22px:('d':p2b(10px,$lh)),
@@ -474,7 +474,8 @@ $base-base-fonts-16: (
       60px:('d':p2b(0px,$lh)),
       62px:('d':p2b(7px,$lh)),
       64px:('d':p2b(7px,$lh), 4:p2b(15px,$lh)),
-      88px:('d':p2b(8px,$lh))
+      70px:('d':p2b(7px,$lh), 4:p2b(12px,$lh)),
+      88px:('d':p2b(8px,$lh), 5:p2b(15px,$lh))
     ),
     'caveat': (
       12px:('d':p2b(4px,$lh)),
