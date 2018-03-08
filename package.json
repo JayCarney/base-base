@@ -4,20 +4,24 @@
   "description": "base-base.scss =========",
   "main": "_base-base.scss",
   "devDependencies": {
-    "sassdoc": "^2.3.0"
+    "sassdoc": "^2.3.0",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.5.0",
+    "gulp-sass": "^3.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "node ./node_modules/.bin/sassdoc . --config ./sassdoc.config.json"
+    "docs": "node ./node_modules/.bin/sassdoc . --config ./sassdoc.config.json",
+    "watch": "node ./node_modules/gulp/bin/gulp"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://JayCarney@github.com/DashMedia/base-base.git"
+    "url": "git+https://JayCarney@github.com/JayCarney/base-base.git"
   },
   "author": "Jason Carney",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DashMedia/base-base/issues"
+    "url": "https://github.com/JayCarney/base-base/issues"
   },
-  "homepage": "https://github.com/DashMedia/base-base#readme"
+  "homepage": "https://github.com/JayCarney/base-base#readme"
 }

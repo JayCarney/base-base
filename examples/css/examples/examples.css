@@ -1,0 +1,492 @@
+body {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 5%, transparent 5%);
+  background-size: 100% 14px;
+  background-position: left 0px; }
+
+.base-base-10 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 0.625rem;
+  line-height: 14px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-11 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 0.6875rem;
+  line-height: 14px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-12 {
+  padding-top: 10pxrem;
+  padding-top: 4pxrem;
+  font-size: 0.75rem;
+  line-height: 14px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-13 {
+  padding-top: 9pxrem;
+  padding-top: 5pxrem;
+  font-size: 0.8125rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-14 {
+  padding-top: 8pxrem;
+  padding-top: 6pxrem;
+  font-size: 0.875rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-15 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 0.9375rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-16 {
+  padding-top: 8pxrem;
+  padding-top: 6pxrem;
+  font-size: 1rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-17 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.0625rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-18 {
+  padding-top: 7pxrem;
+  padding-top: 7pxrem;
+  font-size: 1.125rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-19 {
+  padding-top: 7pxrem;
+  padding-top: 7pxrem;
+  font-size: 1.1875rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-20 {
+  padding-top: 7pxrem;
+  padding-top: 7pxrem;
+  font-size: 1.25rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-21 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.3125rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-22 {
+  padding-top: 5pxrem;
+  padding-top: 9pxrem;
+  font-size: 1.375rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-23 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.4375rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-24 {
+  padding-top: 5pxrem;
+  padding-top: 9pxrem;
+  font-size: 1.5rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-25 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.5625rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-26 {
+  padding-top: 11pxrem;
+  padding-top: 3pxrem;
+  font-size: 1.625rem;
+  line-height: 28px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-27 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.6875rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-28 {
+  padding-top: 10pxrem;
+  padding-top: 4pxrem;
+  font-size: 1.75rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-29 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.8125rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-30 {
+  padding-top: 10pxrem;
+  padding-top: 4pxrem;
+  font-size: 1.875rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-31 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 1.9375rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-32 {
+  padding-top: 9pxrem;
+  padding-top: 5pxrem;
+  font-size: 2rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-33 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.0625rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-34 {
+  padding-top: 8pxrem;
+  padding-top: 6pxrem;
+  font-size: 2.125rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-35 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.1875rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-36 {
+  padding-top: 8pxrem;
+  padding-top: 6pxrem;
+  font-size: 2.25rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-37 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.3125rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-38 {
+  padding-top: 6pxrem;
+  padding-top: 8pxrem;
+  font-size: 2.375rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-39 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.4375rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-40 {
+  padding-top: 13pxrem;
+  padding-top: 1pxrem;
+  font-size: 2.5rem;
+  line-height: 42px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-41 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.5625rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-42 {
+  padding-top: 12pxrem;
+  padding-top: 2pxrem;
+  font-size: 2.625rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-43 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.6875rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-44 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.75rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-45 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.8125rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-46 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.875rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-47 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 2.9375rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-48 {
+  padding-top: 10pxrem;
+  padding-top: 4pxrem;
+  font-size: 3rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-49 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.0625rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-50 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.125rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-51 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.1875rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-52 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.25rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-53 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.3125rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-54 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.375rem;
+  line-height: 56px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-55 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.4375rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-56 {
+  padding-top: 13pxrem;
+  padding-top: 1pxrem;
+  font-size: 3.5rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-57 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.5625rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-58 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.625rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-59 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.6875rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-60 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.75rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-61 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.8125rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-62 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.875rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-63 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 3.9375rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-64 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-65 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4.0625rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-66 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4.125rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-67 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4.1875rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-68 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4.25rem;
+  line-height: 70px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-69 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4.3125rem;
+  line-height: 84px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }
+
+.base-base-70 {
+  padding-top: 0pxrem;
+  padding-top: 14pxrem;
+  font-size: 4.375rem;
+  line-height: 84px;
+  font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
+  font-weight: 400; }

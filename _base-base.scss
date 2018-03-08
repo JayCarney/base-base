@@ -1,8 +1,10 @@
-
+@import 'variables';
 @import 'helpers';
 @import 'font-settings/font-settings-12';
 @import 'font-settings/font-settings-14';
 @import 'font-settings/font-settings-16';
+
+// All adjustments are in rem which != baseline, so need to convert by $adjustment =  $base-line / $base-font-size * $adjustment
 
 $base-base-fonts: (
   12px: $base-base-fonts-12,
@@ -30,8 +32,8 @@ $base-base-fonts: (
   @if($font-size != null){
     $base-lines: $base-lines + get-base($font-size,$font-family,$line-height,$weight);
   }
-  $adjustment: $base-lines * $base-line-height;
-  padding-top: #{$adjustment}rem;
+  // $adjustment: $base-lines / $base-line-height;
+  padding-top: baseline2rem($base-lines);
 };
 
 ///
@@ -54,8 +56,8 @@ $base-base-fonts: (
   @if($font-size != null){
     $base-lines: $base-lines - get-base($font-size,$font-family,$line-height,$weight);
   }
-  $adjustment: $base-lines * $base-line-height;
-  padding-top: #{$adjustment}rem;
+  // $adjustment: $base-lines / $base-line-height;
+  padding-bottom: baseline2rem($base-lines);
 };
 
 ///
@@ -78,8 +80,8 @@ $base-base-fonts: (
   @if($font-size != null){
     $base-lines: $base-lines + get-base($font-size,$font-family,$line-height,$weight);
   }
-  $adjustment: $base-lines * $base-line-height;
-  margin-top: #{$adjustment}rem;
+  // $adjustment: $base-lines / $base-line-height;
+  margin-top: baseline2rem($base-lines);
 };
 
 ///
@@ -102,8 +104,8 @@ $base-base-fonts: (
   @if($font-size != null){
     $base-lines: $base-lines - get-base($font-size,$font-family,$line-height,$weight);
   }
-  $adjustment: $base-lines * $base-line-height;
-  margin-top: #{$adjustment}rem;
+  // $adjustment: $base-lines / $base-line-height;
+  margin-bottom: baseline2rem($base-lines);
 };
 
 ///
@@ -141,10 +143,16 @@ $base-base-fonts: (
   $base-line-height: $base-line-height
   ){
   $min-line-padding: 1px;
-  $line-height: ceil($font-size / $base-line-height);
+  $line-height: 1;
+  
+  @if $font-size != null {
+    $line-height: ceil($font-size/$base-line-height);
+  }
+
   @if($line-height * $base-line-height - $font-size < $min-line-padding * 2){
     $line-height: $line-height + 1;
   }
+  
   @return $line-height;
 }
 
@@ -208,7 +216,7 @@ $base-base-fonts: (
       }
     }
   }
-  @warn "Base-Base: No font settings found for: ${font-size}, ${original-font-family}, ${lines}, ${base-line-height}, ${weight}";
+  @warn "Base-Base: No font settings found for: #{$font-size}, #{$original-font-family}, #{$line-height}, #{$base-line-height}, #{$weight}";
   @return 0 //No size found;
 }
 
@@ -262,8 +270,10 @@ $base-base-fonts: (
   $weight: 400
 ){
   // $base_adjust: get-base($font-size, $font-family, $line-height, $base-line-height, $weight);
-  @include padding-leader($leader, $font-size, true, $font-family, $line-height, $base-line-height, $weight);
-  @include padding-trailer($trailer, $font-size, true, $font-family, $line-height, $base-line-height, $weight);
+  margin-top: 0;
+  margin-bottom: 0;
+  @include padding-leader($leader, $font-size, $font-family, $line-height, $weight);
+  @include padding-trailer($trailer, $font-size, $font-family, $line-height, $weight);
   font-size: #{$font-size / $base-font-size}rem;
   line-height: $line-height * $base-line-height;
   font-family: $font-family, $fallback-font-stack;
@@ -286,7 +296,7 @@ $base-base-fonts: (
 @mixin debug_baseline($pseudo:false, $base-line-height:$base-line-height, $offset:0px){
   @if $visual-grid == true or $visual-grid == yes {
     @if $pseudo == false {
-      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%);
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0) 1px);
       background-size: 100% $base-line-height;
       background-position: left $offset;
     } @else {
@@ -307,6 +317,20 @@ $base-base-fonts: (
         pointer-events: none;
         z-index: 0;
       }
+    }
+  }
+}
+
+///
+/// @group Base-Base
+///
+@mixin prep_root(){
+  @at-root{
+    html {
+      font-size: $base-font-size;
+      line-height: $base-line-height;
+      font-family: $default-font-family, $fallback-font-stack;
+      margin: 0;
     }
   }
 }

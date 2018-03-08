@@ -1,0 +1,14 @@
+@import '../base-base';
+
+@include prep_root();
+
+body{
+    @include debug_baseline(true);
+    margin: 0;
+}
+
+@for $i from 10 through 70 {
+    .base-base-#{$i} {
+        @include base-base($i * 1px);
+    }
+}

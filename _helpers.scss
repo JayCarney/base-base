@@ -32,3 +32,21 @@
 @function p2b($px, $lh: $base-line-height){
     @return px2bl($px, $lh);
 }
+
+///
+/// Convert baseline values to rem
+/// @group Base-Base
+/// @param  {Baselines} $base-lines Font size
+/// @param  {Pixels} $base-font-size [$base-font-size] Base font size
+/// @param  {Pixels} $base-line-height [$base-line-height] Baseline height
+/// @return {rem} Number of rem units this baseline value represents
+///
+@function baseline2rem($base-lines, $base-font-size: $base-font-size, $base-line-height: $base-line-height){
+    @return $base-lines * $base-line-height / $base-font-size * 1rem;
+}
+
+/// @alias baseline2rem
+/// @group Base-Base
+@function b2r($base-lines, $base-font-size: $base-font-size, $base-line-height: $base-line-height){
+    @return baseline2rem($base-lines, $base-font-size: $base-font-size, $base-line-height: $base-line-height);
+}
