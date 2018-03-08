@@ -1,0 +1,34 @@
+///
+/// string replace function, used within base-base
+/// @access private
+/// @group Base-Base
+/// @param  $string Original string
+/// @param  $search Needle to find
+/// @param  $replace Value to replace with
+/// @return {string} New string with changes made
+///
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+    @return $string;
+}
+
+  
+///
+/// Convert pixels to baseline values
+/// @group Base-Base
+/// @param  {Pixels} $px Font size
+/// @param  {Pixels} $lh [$base-line-height] Base line height
+/// @return {float} Number of base lines this pixel value represents
+///
+@function px2bl($px, $lh: $base-line-height){
+    @return $px/$lh;
+}
+
+/// @alias px2bl
+/// @group Base-Base
+@function p2b($px, $lh: $base-line-height){
+    @return px2bl($px, $lh);
+}
