@@ -1,4 +1,13 @@
+$fallback-font-stack: Helvetica, Arial, Sans-Serif;
+$default-font-family: 'Open Sans';
+$default-trailing-space: 2;
+$base-line-height: 16px;
+$base-font-size: 10px;
+$visual-grid: true;
+
 @import '../base-base';
+
+$test-font: 'Open Sans';
 
 @include prep_root();
 
@@ -9,6 +18,6 @@ body{
 
 @for $i from 10 through 70 {
     .base-base-#{$i} {
-        @include base-base($i * 1px);
+        @include base-base($i * 1px, $test-font);
     }
 }

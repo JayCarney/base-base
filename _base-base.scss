@@ -262,7 +262,7 @@ $base-base-fonts: (
 @mixin base-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $trailer: 1,
+  $trailer: $default-trailing-space,
   $leader: 0,
   $line-height: lines-for-font-size($font-size, $base-line-height),
   $fallback-font-stack: $fallback-font-stack,
@@ -275,7 +275,7 @@ $base-base-fonts: (
   @include padding-leader($leader, $font-size, $font-family, $line-height, $weight);
   @include padding-trailer($trailer, $font-size, $font-family, $line-height, $weight);
   font-size: #{$font-size / $base-font-size}rem;
-  line-height: $line-height * $base-line-height;
+  line-height: baseline2rem($line-height);
   font-family: $font-family, $fallback-font-stack;
   font-weight: $weight;
 }
@@ -328,7 +328,7 @@ $base-base-fonts: (
   @at-root{
     html {
       font-size: $base-font-size;
-      line-height: $base-line-height;
+      line-height: pixel2rem($base-line-height);
       font-family: $default-font-family, $fallback-font-stack;
       margin: 0;
     }

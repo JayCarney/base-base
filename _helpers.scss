@@ -50,3 +50,22 @@
 @function b2r($base-lines, $base-font-size: $base-font-size, $base-line-height: $base-line-height){
     @return baseline2rem($base-lines, $base-font-size: $base-font-size, $base-line-height: $base-line-height);
 }
+
+
+///
+/// Convert pixel values to rem
+/// @group Base-Base
+/// @param  {Pixels} $px Pixel size
+/// @param  {Pixels} $base-font-size [$base-font-size] Base font size
+/// @return {rem} Number of rem units this pixel value represents
+///
+@function pixel2rem($px, $base-font-size: $base-font-size){
+    @return $px / $base-font-size * 1rem;
+}
+
+
+/// @alias pixel2rem
+/// @group Base-Base
+@function p2r($px, $base-font-size: $base-font-size){
+    @return pixel2rem($px, $base-font-size);
+}
