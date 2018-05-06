@@ -1,6 +1,6 @@
 @import 'variables';
 @import 'helpers';
-@import 'font-settings/open-sans';
+@import 'font-settings/all';
 
 ///
 /// add $line-height of padding to start of this item
@@ -21,7 +21,6 @@
   @if($font-size != null){
     $base-lines: $base-lines + get-base($font-size,$font-family,$line-height,$weight);
   }
-  // $adjustment: $base-lines / $base-line-height;
   padding-top: baseline2rem($base-lines);
 };
 
@@ -45,7 +44,6 @@
   @if($font-size != null){
     $base-lines: $base-lines - get-base($font-size,$font-family,$line-height,$weight);
   }
-  // $adjustment: $base-lines / $base-line-height;
   padding-bottom: baseline2rem($base-lines);
 };
 
@@ -69,7 +67,6 @@
   @if($font-size != null){
     $base-lines: $base-lines + get-base($font-size,$font-family,$line-height,$weight);
   }
-  // $adjustment: $base-lines / $base-line-height;
   margin-top: baseline2rem($base-lines);
 };
 
@@ -93,7 +90,6 @@
   @if($font-size != null){
     $base-lines: $base-lines - get-base($font-size,$font-family,$line-height,$weight);
   }
-  // $adjustment: $base-lines / $base-line-height;
   margin-bottom: baseline2rem($base-lines);
 };
 

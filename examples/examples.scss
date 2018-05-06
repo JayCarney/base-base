@@ -1,4 +1,4 @@
-@import '../base-base';
+@import '../core/base-base';
 
 @include prep_root();
 
@@ -21,8 +21,4 @@ $max-size: 6 * strip-unit($base-line-height);
     .base-base-#{$i} {
         @include base-base($i * 1px);
     }
-}
-
-.base-base-12 {
-    @include base-base(12px, $line-height: 4);
 }

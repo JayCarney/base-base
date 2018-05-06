@@ -2,7 +2,8 @@
   "name": "base-base",
   "version": "1.0.0",
   "description": "base-base.scss =========",
-  "main": "_base-base.scss",
+  "main": "index.js",
+  "style": "core/_base-base.scss",
   "devDependencies": {
     "sassdoc": "^2.3.0",
     "gulp": "^3.9.1",
