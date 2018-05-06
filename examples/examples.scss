@@ -1,13 +1,4 @@
-$fallback-font-stack: Helvetica, Arial, Sans-Serif;
-$default-font-family: 'Open Sans';
-$default-trailing-space: 2;
-$base-line-height: 16px;
-$base-font-size: 10px;
-$visual-grid: true;
-
 @import '../base-base';
-
-$test-font: 'Open Sans';
 
 @include prep_root();
 
@@ -16,8 +7,22 @@ body{
     margin: 0;
 }
 
-@for $i from 10 through 70 {
+$max-size: 6 * strip-unit($base-line-height);
+
+.base-base-ratio-el{
+    font-family: $default-font-family;
+    font-size: #{$max-size}px;
+    line-height: #{$max-size}px;
+    margin: 0;
+    padding-top: 0px;
+}
+
+@for $i from 10 through $max-size {
     .base-base-#{$i} {
-        @include base-base($i * 1px, $test-font);
+        @include base-base($i * 1px);
     }
+}
+
+.base-base-12 {
+    @include base-base(12px, $line-height: 4);
 }

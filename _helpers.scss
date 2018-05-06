@@ -15,6 +15,17 @@
     @return $string;
 }
 
+/// Remove the unit of a length (https://css-tricks.com/snippets/sass/strip-unit-function/)
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+  
+    @return $number;
+  }
+
   
 ///
 /// Convert pixels to baseline values
@@ -51,21 +62,28 @@
     @return baseline2rem($base-lines, $base-font-size: $base-font-size, $base-line-height: $base-line-height);
 }
 
-
 ///
-/// Convert pixel values to rem
+/// returns leading manual adjustment for the given font
 /// @group Base-Base
-/// @param  {Pixels} $px Pixel size
-/// @param  {Pixels} $base-font-size [$base-font-size] Base font size
-/// @return {rem} Number of rem units this pixel value represents
+/// @access private
+/// @param  $font-family [$default-font-family] Font family
 ///
-@function pixel2rem($px, $base-font-size: $base-font-size){
-    @return $px / $base-font-size * 1rem;
+@function normalise-font-name(
+  $font-family: $default-font-family
+){
+    @return str-replace(to-lower-case($font-family),' ','-');
 }
 
-
-/// @alias pixel2rem
+///
+/// Register a set of font settings for base-base
 /// @group Base-Base
-@function p2r($px, $base-font-size: $base-font-size){
-    @return pixel2rem($px, $base-font-size);
+/// @param  {string} $font-family Font family
+/// @param  {Map} $settings font settings object
+///
+@mixin register-font(
+    $font-family, 
+    $settings
+    ){
+        $cleaned-font-name: normalise-font-name($font-family);
+        $base-base-font-db: map-merge($base-base-font-db , ($cleaned-font-name: $settings)) !global;
 }

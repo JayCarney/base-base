@@ -1,17 +1,6 @@
 @import 'variables';
 @import 'helpers';
-@import 'font-settings/font-settings-12';
-@import 'font-settings/font-settings-14';
-@import 'font-settings/font-settings-16';
-
-// All adjustments are in rem which != baseline, so need to convert by $adjustment =  $base-line / $base-font-size * $adjustment
-
-$base-base-fonts: (
-  12px: $base-base-fonts-12,
-  14px: $base-base-fonts-14,
-  16px: $base-base-fonts-16
-);
-
+@import 'font-settings/open-sans';
 
 ///
 /// add $line-height of padding to start of this item
@@ -121,11 +110,11 @@ $base-base-fonts: (
     font-size: $base-font-size;
   }
   line-height: $base-line-height;
-  margin:{
+  margin: {
     top: 0;
     bottom: 0;
   }
-  padding:{
+  padding: {
     top: 0;
     bottom: 0;
   }
@@ -140,16 +129,16 @@ $base-base-fonts: (
 ///
 @function lines-for-font-size(
   $font-size: $base-font-size,
-  $base-line-height: $base-line-height
+  $base-line-height: $base-line-height,
+  $min-line-height-gap: $min-line-height-gap
   ){
-  $min-line-padding: 1px;
   $line-height: 1;
   
   @if $font-size != null {
     $line-height: ceil($font-size/$base-line-height);
   }
 
-  @if($line-height * $base-line-height - $font-size < $min-line-padding * 2){
+  @if($line-height * $base-line-height - $font-size < $min-line-height-gap * 2){
     $line-height: $line-height + 1;
   }
   
@@ -167,6 +156,42 @@ $base-base-fonts: (
     line-height: lines-for-font-size($font-size) * $base-line-height;
 }
 
+
+///
+/// returns leading manual adjustment for the given font
+/// @group Base-Base
+/// @access private
+/// @param  $font-size [$base-font-size] Font size
+/// @param  $font-family [$default-font-family] Font family
+/// @param  $line-height [lines-for-font-size($font-size)] Number of baselines to use for line-height
+/// @param  $weight [400] Font weight using numeric keywod values
+/// @param  $base-line-height [$base-line-height] Baseline height
+///
+@function get-base-manual-adjust(
+  $font-size: $base-font-size,
+  $font-family: $default-font-family,
+  $weight: 400
+){
+  $cleaned-font-family: normalise-font-name($font-family);
+  $manaul-adjust: 0;
+
+  @if map-has-key($base-base-font-db, $cleaned-font-family){
+    $font-settings: map-get($base-base-font-db, $cleaned-font-family);
+    
+    @if map-has-key($font-settings, manual-adjust){
+      $adjustments: map-get($font-settings, manual-adjust);
+      $unitless-size: strip-unit($font-size);
+
+      @if (map-has-key($adjustments, $unitless-size)){
+        $manaul-adjust: map-get($adjustments, $unitless-size);
+      }
+    }
+  }
+
+  @return $manaul-adjust;
+}
+
+
 ///
 /// returns leading baselines of adjustment from base-base database for the given font settings
 /// @group Base-Base
@@ -180,44 +205,36 @@ $base-base-fonts: (
 @function get-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $line-height: lines-for-font-size($font-size),
+  $base-lines: lines-for-font-size($font-size),
   $weight: 400,
   $base-line-height: $base-line-height
-  ){
-  $original-font-family: $font-family;
-  @if $weight != 400 {
-    // 400 does not use a suffixes name as it's used as the default, not all fonts require bold varients to be correctly baselined
-    $font-family: $font-family + ":" + $weight;
-  }
-  @if map-has-key($base-base-fonts, $base-line-height){
-    $base-line-settings: map-get($base-base-fonts, $base-line-height);
-    $cleaned-font-family: str-replace(to-lower-case($font-family),' ','-');
-    @if map-has-key($base-line-settings,$cleaned-font-family){
-      $font-settings: map-get($base-line-settings,$cleaned-font-family);
-      @if map-has-key($font-settings, $font-size){
-        $size-settings: map-get($font-settings, $font-size);
-        @if map-has-key($size-settings, $line-height){
-          @return map-get($size-settings, $line-height);
-        } @else {
-          @return map-get($size-settings, 'd');
-        }
-      } @else {
-        // no font size exists
-        @if $weight != 400{
-          // return the "normal" variant of this font instead
-          @return get-base($font-size, $original-font-family, $line-height, $base-line-height, 400);
-        }
-      }
-    } @else {
-      // no font family exists
-      @if $weight != 400 {
-        // return the "normal" variant of this font instead
-        @return get-base($font-size, $original-font-family, $line-height, $base-line-height, 400);
-      }
+){
+  $cleaned-font-family: normalise-font-name($font-family);
+  $adjust-percentage: 0;
+  $line-height: $base-lines * $base-line-height;
+
+  @if map-has-key($base-base-font-db, $cleaned-font-family){
+    $font-settings: map-get($base-base-font-db, $cleaned-font-family);
+
+    @if(map-has-key($font-settings, adjust-ratio)){
+      $adjust-percentage: map-get($font-settings, adjust-ratio);
     }
+  } @else {
+    @error "Base-Base: No font const found for : #{$cleaned-font-family}"
   }
-  @warn "Base-Base: No font settings found for: #{$font-size}, #{$original-font-family}, #{$line-height}, #{$base-line-height}, #{$weight}";
-  @return 0 //No size found;
+
+  $x-height-adjust: $adjust-percentage * $font-size;
+  $lh-adjust: ($line-height - $font-size) / 2;
+
+  $manaul-adjust: get-base-manual-adjust($font-size, $font-family, $weight);
+
+  $total-adjust: round($x-height-adjust + $lh-adjust) + $manaul-adjust;  
+
+  @while ($total-adjust >= $base-line-height){
+    $total-adjust: $total-adjust - $base-line-height;
+  }
+
+  @return p2b($total-adjust);
 }
 
 ///
@@ -239,6 +256,7 @@ $base-base-fonts: (
   ){
   @return 1 - get-base($font-size, $font-family, $line-height, $base-line-height, $weight);
 }
+
 
 ///
 /// returns baselines of adjustment from base-base database for the given font settings
@@ -262,7 +280,7 @@ $base-base-fonts: (
 @mixin base-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
-  $trailer: $default-trailing-space,
+  $trailer: 1,
   $leader: 0,
   $line-height: lines-for-font-size($font-size, $base-line-height),
   $fallback-font-stack: $fallback-font-stack,
@@ -275,7 +293,7 @@ $base-base-fonts: (
   @include padding-leader($leader, $font-size, $font-family, $line-height, $weight);
   @include padding-trailer($trailer, $font-size, $font-family, $line-height, $weight);
   font-size: #{$font-size / $base-font-size}rem;
-  line-height: baseline2rem($line-height);
+  line-height: $line-height * $base-line-height;
   font-family: $font-family, $fallback-font-stack;
   font-weight: $weight;
 }
@@ -328,7 +346,7 @@ $base-base-fonts: (
   @at-root{
     html {
       font-size: $base-font-size;
-      line-height: pixel2rem($base-line-height);
+      line-height: $base-line-height;
       font-family: $default-font-family, $fallback-font-stack;
       margin: 0;
     }
