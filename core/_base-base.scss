@@ -96,16 +96,16 @@
 ///
 /// remove vertical margin and padding, reset font sizes etc to default
 /// @group Base-Base
-/// @param  $base-line-height [$base-line-height] Base line height to set this item to
+/// @param  $baseline-height [$baseline-height] Base line height to set this item to
 ///
-@mixin neutralise($base-line-height: $base-line-height){
+@mixin neutralise($baseline-height: $baseline-height){
   font-family: $default-font-family, $fallback-font-stack;
   @if $base-use-rem {
     font-size: 1rem;
   } @else {
     font-size: $base-font-size;
   }
-  line-height: $base-line-height;
+  line-height: $baseline-height;
   margin: {
     top: 0;
     bottom: 0;
@@ -121,20 +121,20 @@
 /// @access private
 /// @group Base-Base
 /// @param  $font-size [$base-font-size] Font size to check
-/// @param  $base-line-height [$base-line-height] Base line height
+/// @param  $baseline-height [$baseline-height] Base line height
 ///
 @function lines-for-font-size(
   $font-size: $base-font-size,
-  $base-line-height: $base-line-height,
+  $baseline-height: $baseline-height,
   $min-line-height-gap: $min-line-height-gap
   ){
   $line-height: 1;
   
   @if $font-size != null {
-    $line-height: ceil($font-size/$base-line-height);
+    $line-height: ceil($font-size/$baseline-height);
   }
 
-  @if($line-height * $base-line-height - $font-size < $min-line-height-gap * 2){
+  @if($line-height * $baseline-height - $font-size < $min-line-height-gap * 2){
     $line-height: $line-height + 1;
   }
   
@@ -145,11 +145,11 @@
 /// Establish default font size and line-height of an item
 /// @group Base-Base
 /// @param  $font-size [$base-font-size] Base font size
-/// @param  $base-line-height [$base-line-height] Base line height
+/// @param  $baseline-height [$baseline-height] Base line height
 ///
-@mixin establish-baseline($font-size: $base-font-size, $base-line-height: $base-line-height) {
+@mixin establish-baseline($font-size: $base-font-size, $baseline-height: $baseline-height) {
     font-size: $font-size;
-    line-height: lines-for-font-size($font-size) * $base-line-height;
+    line-height: lines-for-font-size($font-size) * $baseline-height;
 }
 
 
@@ -161,7 +161,7 @@
 /// @param  $font-family [$default-font-family] Font family
 /// @param  $line-height [lines-for-font-size($font-size)] Number of baselines to use for line-height
 /// @param  $weight [400] Font weight using numeric keywod values
-/// @param  $base-line-height [$base-line-height] Baseline height
+/// @param  $baseline-height [$baseline-height] Baseline height
 ///
 @function get-base-manual-adjust(
   $font-size: $base-font-size,
@@ -196,18 +196,18 @@
 /// @param  $font-family [$default-font-family] Font family
 /// @param  $line-height [lines-for-font-size($font-size)] Number of baselines to use for line-height
 /// @param  $weight [400] Font weight using numeric keywod values
-/// @param  $base-line-height [$base-line-height] Baseline height
+/// @param  $baseline-height [$baseline-height] Baseline height
 ///
 @function get-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
   $base-lines: lines-for-font-size($font-size),
   $weight: 400,
-  $base-line-height: $base-line-height
+  $baseline-height: $baseline-height
 ){
   $cleaned-font-family: normalise-font-name($font-family);
   $adjust-percentage: 0;
-  $line-height: $base-lines * $base-line-height;
+  $line-height: $base-lines * $baseline-height;
 
   @if map-has-key($base-base-font-db, $cleaned-font-family){
     $font-settings: map-get($base-base-font-db, $cleaned-font-family);
@@ -226,8 +226,8 @@
 
   $total-adjust: round($x-height-adjust + $lh-adjust) + $manaul-adjust;  
 
-  @while ($total-adjust >= $base-line-height){
-    $total-adjust: $total-adjust - $base-line-height;
+  @while ($total-adjust >= $baseline-height){
+    $total-adjust: $total-adjust - $baseline-height;
   }
 
   @return p2b($total-adjust);
@@ -240,17 +240,17 @@
 /// @param  $font-size [$base-font-size] Font size
 /// @param  $font-family [$default-font-family] Font family
 /// @param  $line-height [lines-for-font-size($font-size)] Number of baselines to use for line-height
-/// @param  $base-line-height [$base-line-height] Baseline height
+/// @param  $baseline-height [$baseline-height] Baseline height
 /// @param  $weight [400] Font weight
 ///
 @function get-bottom-base(
   $font-size: $base-font-size,
   $font-family: $default-font-family,
   $line-height: lines-for-font-size($font-size),
-  $base-line-height: $base-line-height,
+  $baseline-height: $baseline-height,
   $weight: 400
   ){
-  @return 1 - get-base($font-size, $font-family, $line-height, $base-line-height, $weight);
+  @return 1 - get-base($font-size, $font-family, $line-height, $baseline-height, $weight);
 }
 
 
@@ -268,9 +268,9 @@
 /// @param  $font-family [$default-font-family] Font family
 /// @param  $trailer [null] Trailing baselines of whitespace
 /// @param  $leader [0] Leading baselines of whitespace
-/// @param  $line-height [lines-for-font-size($font-size, $base-line-height)] Number of baselines to use for line-height
+/// @param  $line-height [lines-for-font-size($font-size, $baseline-height)] Number of baselines to use for line-height
 /// @param  $fallback-font-stack [$fallback-font-stack] Fallback font stack
-/// @param  $base-line-height [$base-line-height] Base line height
+/// @param  $baseline-height [$baseline-height] Base line height
 /// @param  $weight [400] Font weight
 ///
 @mixin base-base(
@@ -278,18 +278,18 @@
   $font-family: $default-font-family,
   $trailer: 1,
   $leader: 0,
-  $line-height: lines-for-font-size($font-size, $base-line-height),
+  $line-height: lines-for-font-size($font-size, $baseline-height),
   $fallback-font-stack: $fallback-font-stack,
-  $base-line-height: $base-line-height,
+  $baseline-height: $baseline-height,
   $weight: 400
 ){
-  // $base_adjust: get-base($font-size, $font-family, $line-height, $base-line-height, $weight);
+  // $base_adjust: get-base($font-size, $font-family, $line-height, $baseline-height, $weight);
   margin-top: 0;
   margin-bottom: 0;
   @include padding-leader($leader, $font-size, $font-family, $line-height, $weight);
   @include padding-trailer($trailer, $font-size, $font-family, $line-height, $weight);
   font-size: #{$font-size / $base-font-size}rem;
-  line-height: $line-height * $base-line-height;
+  line-height: $line-height * $baseline-height;
   font-family: $font-family, $fallback-font-stack;
   font-weight: $weight;
 }
@@ -304,14 +304,14 @@
 ///     @include debug_baseline();
 ///   }
 /// @param  $pseudo [false] Use a pseudo element instead of this item
-/// @param  $base-line-height [$base-line-height] Baseline height
+/// @param  $baseline-height [$baseline-height] Baseline height
 /// @param  $offset [0px] Grid offset
 ///
-@mixin debug_baseline($pseudo:false, $base-line-height:$base-line-height, $offset:0px){
+@mixin debug_baseline($pseudo:false, $baseline-height:$baseline-height, $offset:0px){
   @if $visual-grid == true or $visual-grid == yes {
     @if $pseudo == false {
       background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0) 1px);
-      background-size: 100% $base-line-height;
+      background-size: 100% $baseline-height;
       background-position: left $offset;
     } @else {
       position: relative;
@@ -327,7 +327,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        @include debug_baseline($base-line-height: $base-line-height);
+        @include debug_baseline($baseline-height: $baseline-height);
         pointer-events: none;
         z-index: 0;
       }
@@ -342,7 +342,7 @@
   @at-root{
     html {
       font-size: $base-font-size;
-      line-height: $base-line-height;
+      line-height: $baseline-height;
       font-family: $default-font-family, $fallback-font-stack;
       margin: 0;
     }

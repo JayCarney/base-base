@@ -27,54 +27,36 @@ None! (aside from Sass)
 
 #### Configuration Variables
 
-```scss
-$fallback-font-stack: Helvetica, Arial, Sans-Serif !default;
-$default-font-family: "Open Sans" !default;
-$base-line-height: 16px !default;
-$base-font-size: 16px !default;
-$base-use-rem: true !default;
-$base-base-unit: rem !default;
-```
+| Variable | Default | Description |
+|---|---|---|
+| $fallback-font-stack | Helvetica, Arial, Sans-Serif !default | Fallback fonts appenended to font-family in css output |
+| $default-font-family | "Open Sans" !default | Font used when no font family specifically given |
+| $baseline-height | 16px !default | baseline height used for calculations and debug background |
+| $base-font-size | 16px !default | font size to set the root of the document to and to base all calculations on |
+| $visual-grid | true !default | toggle the baseline grid on debug elemenets |
+| $min-line-height-gap | 1px !default | minimum space between size of font and line-height before adding another baseline |
+| $base-base-font-db | () !default | sass map holding all font settings, fonts should be added to this via `register-font` |
 
 ### Adding new fonts
 
-The default lines for a given font size is assigned as `d` where as specific adjustments for other line-heights can be added with an integer for the given base lines.
+Every partial file in the `core/font-settings` directory is automattically added to `core/font-settings/_all.scss` when a sass build is run on the project.
 
-Example font-face settings (view `_font-settings-16.scss` for real fonts)
-
-```scss
-$lh: 16px;
-$base-base-fonts-16: (
-  'adelle': (
-    12px:('d':p2b(4px,$lh)),
-    14px:('d':p2b(11px,$lh)),
-    16px:('d':p2b(11px,$lh), 1:p2b(3px,$lh)),
-    18px:('d':p2b(10px,$lh)),
-    20px:('d':p2b(9px,$lh)),
-    21px:('d':p2b(9px,$lh)),
-    22px:('d':p2b(9px,$lh)),
-    24px:('d':p2b(8px,$lh)),
-    26px:('d':p2b(7px,$lh)),
-    28px:('d':p2b(7px,$lh)),
-    30px:('d':p2b(14px,$lh)),
-    32px:('d':p2b(13px,$lh)),
-    34px:('d':p2b(13px,$lh)),
-    36px:('d':p2b(11px,$lh)),
-    38px:('d':p2b(11px,$lh)),
-    40px:('d':p2b(10px,$lh)),
-    42px:('d':p2b(9px,$lh))
-  )
-)
-```
-
-Example font size with different number of lines (line heights)
+Each font should have its own configuration file within the font-settings directory following the below format.
 
 ```scss
-$base-base-fonts-16: (
-  'adelle': (
-    // ... more sizes
-    16px:('d':p2b(11px,$lh), 1:p2b(3px,$lh)),
-    // ... more sizes
+$font-settings: (
+    adjust-ratio: (8/72),
+    manual-adjust: (
+        12: 1
+        ...
+        64: 1,
     )
-  )
+);
+
+@include register-font('Open Sans', $font-settings);
 ```
+
+| Variable | Description |
+|---|---|
+| adjust-ratio | this is the bases of base-base calculations, this is essentially the top padding needed to be added to the `base-base-ratio-el` for it to align with the baseline divided by the font-size of `base-base-ratio-el` |
+| manual-adjust | sass map indexed by font size, with a value how many pixels to adjust the top padding by at this font-size to align with the baseline |

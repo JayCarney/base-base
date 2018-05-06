@@ -7,7 +7,7 @@ body{
     margin: 0;
 }
 
-$max-size: 6 * strip-unit($base-line-height);
+$max-size: 6 * strip-unit($baseline-height);
 
 .base-base-ratio-el{
     font-family: $default-font-family;
