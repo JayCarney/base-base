@@ -1,24 +1,23 @@
 @import '../core/base-base';
-
 @include prep_root();
+$test-font: 'Source Sans Pro';
 
-body{
+.debug{
     @include debug_baseline(true);
-    margin: 0;
 }
 
 $max-size: 6 * strip-unit($baseline-height);
 
 .base-base-ratio-el{
-    font-family: $default-font-family;
+    font-family: $test-font;
     font-size: #{$max-size}px;
     line-height: #{$max-size}px;
-    margin: 0;
+    margin: 0 0 20px;
     padding-top: 0px;
 }
 
 @for $i from 10 through $max-size {
     .base-base-#{$i} {
-        @include base-base($i * 1px);
+        @include base-base($i * 1px, $test-font);
     }
 }

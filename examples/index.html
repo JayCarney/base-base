@@ -8,22 +8,17 @@
     <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|Raleway|Roboto|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="/css/examples.css">
 </head>
-<body>
+<body class="debug">
     <script>
         const baseLineHeight = 12;
         const maxSize = baseLineHeight * 6;
 
         for (let i = 10; i <= maxSize; i++) {
             const testEl = document.createElement('p');            
-            testEl.innerText = `${i}px: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore`;
+            testEl.innerText = `${i}px: LXx`;
             testEl.classList.add(`base-base-${i}`);
             document.body.appendChild(testEl);
         }
-
-        const ratioEl = document.createElement('p');
-        ratioEl.innerText = `${maxSize}px: Ratio element, use this element to generate the base-base seed used in _font-const.scss`;
-        ratioEl.classList.add(`base-base-ratio-el`);
-        document.body.appendChild(ratioEl);
     </script>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base Base - Baselining Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|Raleway|Roboto|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="/css/examples.css">
+</head>
+<body>
+    <p class="base-base-ratio-el debug" id="ratio-el">LXx: Ratio element, use this element to generate the base-base seed used in _font-const.scss</p>
+    <input id="ratio-check" value="0" type="number">
+    <pre id="ratio-output">(0/72)</pre>
+
+    <script>
+        const ratioEl = document.querySelector('#ratio-el');
+        const paddingEl = document.querySelector('#ratio-check');
+        const output = document.querySelector('#ratio-output');
+
+        const ratioElStyles = window.getComputedStyle(ratioEl);
+        
+        let lineHeight = ratioElStyles.getPropertyValue('line-height');
+        let fontFamily = ratioElStyles.getPropertyValue('font-family');
+
+        let padding = paddingEl.value;
+
+        update = () => {
+            output.innerHTML = `
+$font-settings: (
+    adjust-ratio: (${padding}/${parseInt(lineHeight)}),
+    manual-adjust: ()
+);
+
+@include register-font('${fontFamily}', $font-settings);
+`;
+        };
+
+        update();
+
+        paddingChange = (evt) => {
+            padding = evt.target.value;
+            ratioEl.style.paddingTop = `${padding}px`;
+            update();
+        };
+        
+        paddingEl.addEventListener("keyup", paddingChange);
+        paddingEl.addEventListener("change", paddingChange);
+    </script>
+</body>
+</html>

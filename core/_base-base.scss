@@ -171,6 +171,8 @@
   $cleaned-font-family: normalise-font-name($font-family);
   $manaul-adjust: 0;
 
+  @warn $base-base-font-db;
+
   @if map-has-key($base-base-font-db, $cleaned-font-family){
     $font-settings: map-get($base-base-font-db, $cleaned-font-family);
     
@@ -344,6 +346,9 @@
       font-size: $base-font-size;
       line-height: $baseline-height;
       font-family: $default-font-family, $fallback-font-stack;
+      margin: 0;
+    }
+    body{
       margin: 0;
     }
   }

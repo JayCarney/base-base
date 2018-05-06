@@ -1,0 +1,14 @@
+$font-settings: (
+    adjust-ratio: (11/72),
+    manual-adjust: (
+        11: 1,
+        13: 1,
+        16: 1,
+        28: 1,
+        36: -1,
+        42: 1,
+        62: 1,
+    )
+);
+
+@include register-font('Raleway', $font-settings);

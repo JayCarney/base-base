@@ -14,20 +14,20 @@ gulp.task('connect', function(){
 
 // keeps gulp from crashing for scss errors
 gulp.task('sass', ['sass-includes'], function () {
-  return gulp.src('./examples/*.scss')
+  return gulp.src('./examples/**/*.scss')
       .pipe(sass({ errLogToConsole: true }))
       .pipe(gulp.dest('./examples/css'))
       .pipe(connect.reload());
 });
 
 gulp.task('livereload', function (){
-  gulp.src('./example/**/*')
+  gulp.src('./examples/**/*')
   .pipe(connect.reload());
 });
 
 gulp.task('watch', function () {
   gulp.watch(['./**/*.scss', '!./**/_all.scss'], ['sass']);
-  gulp.watch('./example/**/*', ['livereload']);
+  gulp.watch('./examples/**/*', ['livereload']);
 });
 
 
