@@ -16,6 +16,7 @@
 }
 
 /// Remove the unit of a length (https://css-tricks.com/snippets/sass/strip-unit-function/)
+/// @group Base-Base
 /// @param {Number} $number - Number to remove unit from
 /// @return {Number} - Unitless number
 @function strip-unit($number) {
