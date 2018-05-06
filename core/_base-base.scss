@@ -132,6 +132,8 @@
   
   @if $font-size != null {
     $line-height: ceil($font-size/$baseline-height);
+  } @else {
+    $font-size: 0;
   }
 
   @if($line-height * $baseline-height - $font-size < $min-line-height-gap * 2){
@@ -170,8 +172,6 @@
 ){
   $cleaned-font-family: normalise-font-name($font-family);
   $manaul-adjust: 0;
-
-  @warn $base-base-font-db;
 
   @if map-has-key($base-base-font-db, $cleaned-font-family){
     $font-settings: map-get($base-base-font-db, $cleaned-font-family);

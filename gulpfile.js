@@ -15,7 +15,10 @@ gulp.task('connect', function(){
 // keeps gulp from crashing for scss errors
 gulp.task('sass', ['sass-includes'], function () {
   return gulp.src('./examples/**/*.scss')
-      .pipe(sass({ errLogToConsole: true }))
+      .pipe(sass({
+				includePaths: ['node_modules'],
+				errLogToConsole: true
+			}))
       .pipe(gulp.dest('./examples/css'))
       .pipe(connect.reload());
 });
