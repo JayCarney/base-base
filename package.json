@@ -15,7 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "node ./node_modules/sassdoc/bin/sassdoc core --config ./sassdoc.config.json",
-    "watch": "node ./node_modules/gulp/bin/gulp"
+    "watch": "node node_modules/gulp/bin/gulp"
   },
   "repository": {
     "type": "git",

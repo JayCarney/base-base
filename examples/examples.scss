@@ -6,25 +6,42 @@ $grid-breakpoints: (
   xl: 1200px
 );
 
-$visual-grid: false;
+$visual-grid: true;
 @import '../core/base-base';
 @import 'bootstrap/scss/mixins/breakpoints';
 @import 'cssgrid/src/grid12';
 @include prep_root();
-$test-font: 'Source Sans Pro';
+$test-font: 'Noto Sans';
 
 .debug{
     @include debug_baseline(true);
 }
 
-$max-size: 6 * strip-unit($baseline-height);
+$max-size: 12 * strip-unit($baseline-height);
 
 .base-base-ratio-el{
     font-family: $test-font;
     font-size: #{$max-size}px;
     line-height: #{$max-size}px;
-    margin: 0 0 20px;
     padding-top: 0px;
+    position: relative;
+    
+
+    &__size{
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        height: 20px;
+        width: 100%;
+        background-color: rgba(red, 0.4);
+        z-index: -1;
+        @if(get-glyph-height-for($test-font) > 0){
+            height: #{get-glyph-height-for($test-font) * $max-size}px;
+        } @else {
+            height: #{$max * 0.6}px;
+        }
+    }
 }
 
 @for $i from 10 through $max-size {
@@ -32,6 +49,18 @@ $max-size: 6 * strip-unit($baseline-height);
         @include base-base($i * 1px, $test-font);
     }
 }
+
+@for $i from 10 through $max-size {
+    .base-debug-#{$i} {
+        line-height: lines-for-font-size($i * 1px) * $baseline-height;
+        font-family: $test-font;
+        font-size: $i * 1px;
+        padding: 0;
+        margin: 0;
+        color: red;
+    }
+}
+
 
 
 

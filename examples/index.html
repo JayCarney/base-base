@@ -5,19 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Base Base - Baselining Template</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|Raleway|Roboto|Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montsrrat|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|Raleway|Roboto|Source+Sans+Pro|Noto+Sans:400" rel="stylesheet">
     <link rel="stylesheet" href="/css/examples.css">
 </head>
-<body class="debug">
+<body>
+    <div class="grid12">
+        <div class="grid12__span-6" id="test-area">
+            <input type="text" id="ratio-el" value="186/240">
+            <input type="text" id="baseline-el" value="12">
+            <input type="text" id="baseline-font" value="Noto Sans">
+        </div>
+        <div class="grid12__span-6" id="output" style="overflow: visible;"></div>
+    </div>
     <script>
+        const ratioEl = document.querySelector('#ratio-el');
+        const testArea = document.querySelector('#test-area');
+        const outputArea = document.querySelector('#output');
         const baseLineHeight = 12;
         const maxSize = baseLineHeight * 6;
+        let ratio = getRatio();
 
         for (let i = 10; i <= maxSize; i++) {
-            const testEl = document.createElement('p');            
+            const controlWrap = document.createElement('div');
+            const button = document.createElement('button');
+            const testEl = document.createElement('p');
+            
+            controlWrap.classList.add('grid12');
+            controlWrap.classList.add('grid12--align-top');
+            controlWrap.style.marginBottom = `${baseLineHeight * 2}px`;
+            button.classList.add(`grid12__span-2`);
+            button.textContent = 'Enhance!';
+            button.addEventListener('click', () => {
+                enhanceSize(testEl);
+            });
+
             testEl.innerText = `${i}px: LXx`;
-            testEl.classList.add(`base-base-${i}`);
-            document.body.appendChild(testEl);
+            testEl.classList.add(`debug`);
+            testEl.classList.add(`grid12__span-10`);
+            testEl.classList.add(`base-debug-${i}`);
+            testEl.classList.add(`base-debug`);
+            testEl.dataset.size = i;
+
+            controlWrap.appendChild(testEl);
+            controlWrap.appendChild(button);            
+            testArea.appendChild(controlWrap);
+            
+            setPaddings(testEl, ratio);            
+        }
+
+        generateConfig();
+
+        function generateConfig(){
+            const output = document.createElement('pre');
+            output.style.position = "sticky";
+            output.style.top = "0px";
+            const fontFamily = window.getComputedStyle(document.querySelector('.base-debug')).fontFamily;
+
+            const testEls = Array.prototype.slice.call(document.querySelectorAll('.base-debug'));
+            
+            let manualAdjust = testEls.reduce((reducer, el) => {
+                const adjust = parseInt(el.dataset.adjust || 0);
+                if(adjust !== 0){
+                    reducer[el.dataset.size] = adjust;
+                }
+                return reducer;
+            }, {});
+
+            manualAdjust = Object.keys(manualAdjust)
+                .map((size) => {
+                    return `${size}: ${manualAdjust[size]}`;
+                })
+                .reduce((reducer, line)=>{
+                    return reducer + `        ${line},\n`;
+                },'')
+                .slice(0, -1);
+
+            output.innerHTML = `
+$font-settings: (
+    adjust-ratio: (${ratioEl.value}), 
+    manual-adjust: (
+${manualAdjust}
+        )
+);
+
+@include register-font(${fontFamily}, $font-settings);
+            `
+            outputArea.innerHTML = '';
+            outputArea.appendChild(output);
+        }
+
+        function enhanceSize(el){
+            let currentAdjust = parseInt(el.dataset.adjust);
+
+            switch(currentAdjust){
+                case 1:
+                    el.dataset.adjust = -1;
+                    break;
+                case -1:
+                    el.dataset.adjust = 0;
+                    break;
+                default:
+                    el.dataset.adjust = 1;
+            }
+            setPaddings(el, ratio);
+            generateConfig();
+        }
+
+        function setPaddings(el, xRatio){
+            const compStyles = window.getComputedStyle(el);
+            const fontSize = parseInt(compStyles.fontSize);
+            const lineHeight = parseInt(compStyles.lineHeight);
+            const baselineHeight = getBaseline();
+            const manualAdjust = parseInt(el.dataset.adjust || 0);
+
+            let topPadding = Math.round((lineHeight - fontSize + (fontSize * (1 - xRatio))) / 2 + manualAdjust);
+
+            el.style.paddingTop = `${topPadding}px`;
+            el.style.paddingBottom = `${baselineHeight - topPadding}px`;
+        }
+
+        function getRatio(){
+            const ratio = ratioEl.value;
+            const values = ratio.trim().split('/').map(value => parseInt(value));
+            return values[0] / values[1];
+        }
+
+        function getBaseline(){
+            const baselineEl = document.querySelector('#baseline-el');
+            return parseInt(baselineEl.value);
         }
     </script>
 </body>

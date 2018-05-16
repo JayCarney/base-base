@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Base Base - Baselining Template</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|Raleway|Roboto|Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|Raleway|Roboto|Source+Sans+Pro|Noto+Sans:400" rel="stylesheet">
     <link rel="stylesheet" href="/css/examples.css">
 </head>
 <body>
-    <p class="base-base-ratio-el debug" id="ratio-el">LXx: Ratio element, use this element to generate the base-base seed used in _font-const.scss</p>
-    <input id="ratio-check" value="0" type="number">
+    <p class="base-base-ratio-el debug" id="ratio-el">
+        X
+        <span class="base-base-ratio-el__size" id="ratio-el-size"></div>
+    </p>
+    
+    <input style="margin-top: 20px;" id="ratio-check" value="30" type="number">
     <pre id="ratio-output">(0/72)</pre>
 
     <script>
         const ratioEl = document.querySelector('#ratio-el');
+        const ratioSizeEl = document.querySelector('#ratio-el-size');
         const paddingEl = document.querySelector('#ratio-check');
         const output = document.querySelector('#ratio-output');
 
@@ -28,24 +33,31 @@
         update = () => {
             output.innerHTML = `
 $font-settings: (
-    adjust-ratio: (${padding}/${parseInt(lineHeight)}),
+    adjust-ratio: (${padding}/${parseInt(lineHeight)}), ${padding % 2 === 1 ? '// WARNING even numbers are recommended, try adding 1 to your value':''}
     manual-adjust: ()
 );
 
-@include register-font('${fontFamily}', $font-settings);
+@include register-font(${fontFamily}, $font-settings);
 `;
         };
 
         update();
 
-        paddingChange = (evt) => {
-            padding = evt.target.value;
-            ratioEl.style.paddingTop = `${padding}px`;
+        sizeChange = (evt) => {
+            padding = parseInt(paddingEl.value);
+            ratioSizeEl.style.height = `${padding}px`;
+            ratioSizeEl.style.top = `${parseInt((parseInt(lineHeight) - padding) / 2)}px`;
             update();
         };
         
-        paddingEl.addEventListener("keyup", paddingChange);
-        paddingEl.addEventListener("change", paddingChange);
+        paddingEl.addEventListener("keyup", sizeChange);
+        paddingEl.addEventListener("change", sizeChange);
+
+        paddingEl.value = parseInt(window.getComputedStyle(ratioSizeEl).height);
+        paddingEl.focus();
+        sizeChange();
     </script>
+
+    
 </body>
 </html>

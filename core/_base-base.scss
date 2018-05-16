@@ -208,31 +208,40 @@
   $baseline-height: $baseline-height
 ){
   $cleaned-font-family: normalise-font-name($font-family);
-  $adjust-percentage: 0;
-  $line-height: $base-lines * $baseline-height;
+  $glyph-height: get-glyph-height-for($cleaned-font-family);
+  $line-height: $base-lines * $baseline-height;  
+
+  $x-height-adjust: $font-size * (1 - $glyph-height);
+  $lh-adjust: $line-height - $font-size;
+
+  $manaul-adjust: get-base-manual-adjust($font-size, $font-family, $weight);
+
+  $total-adjust: round(($x-height-adjust + $lh-adjust) / 2 + $manaul-adjust);  
+
+  // @while ($total-adjust >= $baseline-height){
+  //   $total-adjust: $total-adjust - $baseline-height;
+  // }
+
+  @return p2b($total-adjust);
+}
+
+@function get-glyph-height-for(
+  $font-family: $default-font-family
+){
+  $cleaned-font-family: normalise-font-name($font-family);
+  $glyph-height: 0;
 
   @if map-has-key($base-base-font-db, $cleaned-font-family){
     $font-settings: map-get($base-base-font-db, $cleaned-font-family);
 
     @if(map-has-key($font-settings, adjust-ratio)){
-      $adjust-percentage: map-get($font-settings, adjust-ratio);
+      $glyph-height: map-get($font-settings, adjust-ratio);
     }
   } @else {
-    @error "Base-Base: No font const found for : #{$cleaned-font-family}"
+    @warn "Base-Base: No font const found for : #{$cleaned-font-family}"
   }
 
-  $x-height-adjust: $adjust-percentage * $font-size;
-  $lh-adjust: ($line-height - $font-size) / 2;
-
-  $manaul-adjust: get-base-manual-adjust($font-size, $font-family, $weight);
-
-  $total-adjust: round($x-height-adjust + $lh-adjust) + $manaul-adjust;  
-
-  @while ($total-adjust >= $baseline-height){
-    $total-adjust: $total-adjust - $baseline-height;
-  }
-
-  @return p2b($total-adjust);
+  @return $glyph-height;
 }
 
 ///

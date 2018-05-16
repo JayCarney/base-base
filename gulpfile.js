@@ -18,7 +18,7 @@ gulp.task('sass', ['sass-includes'], function () {
       .pipe(sass({
 				includePaths: ['node_modules'],
 				errLogToConsole: true
-			}))
+			}).on('error', sass.logError))
       .pipe(gulp.dest('./examples/css'))
       .pipe(connect.reload());
 });
@@ -41,7 +41,7 @@ gulp.task('watch', function () {
 // Import the whole directory with @import "somedir/all";
 gulp.task('sass-includes', function (callback) {
 	var all = '_all.scss';
-	glob('./**/' + all, function (error, files) {
+	glob(path.join(__dirname, '**', all), function (error, files) {
 		files.forEach(function (allFile) {
 			// Add a banner to warn users
 			fs.writeFileSync(allFile, '/** This is a dynamically generated file **/\n\n');
@@ -63,8 +63,7 @@ gulp.task('sass-includes', function (callback) {
 			});
 		});
 	});
-
 	callback();
 });
 
-gulp.task('default', ['connect', 'watch', 'sass']);
+gulp.task('default', ['connect', 'sass', 'watch']);
