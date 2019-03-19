@@ -249,10 +249,10 @@
   $font-size: $base-font-size,
   $font-family: $default-font-family,
   $line-height: lines-for-font-size($font-size),
-  $baseline-height: $baseline-height,
-  $weight: 400
+  $weight: 400,
+  $baseline-height: $baseline-height
   ){
-  @return 1 - get-base($font-size, $font-family, $line-height, $baseline-height, $weight);
+  @return 1 - get-base($font-size, $font-family, $line-height, $weight, $baseline-height);
 }
 
 
