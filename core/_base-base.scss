@@ -292,7 +292,7 @@
   @include padding-leader($leader, $font-size, $font-family, $line-height, $weight);
   @include padding-trailer($trailer, $font-size, $font-family, $line-height, $weight);
   font-size: #{$font-size / $base-font-size}rem;
-  line-height: baseline2rem($baseline-height);
+  line-height: baseline2rem($line-height);
   font-family: $font-family, $fallback-font-stack;
   font-weight: $weight;
 }
