@@ -11,12 +11,12 @@ p{
   // You write this
   @include base-base(24px, "Open Sans", 2);
   // And get this
-  padding-top: 0.5625rem;
-  margin-bottom: 1.4375rem;
   margin-top: 0;
   padding-bottom: 0;
+  padding-top: 0.5625rem;
+  padding-bottom: 1.4375rem;
   font-size: 1.5rem;
-  line-height: 32px;
+  line-height: 2rem;
   font-family: "Open Sans", Helvetica, Arial, Sans-Serif;
 }
 ```
@@ -47,8 +47,8 @@ Each font should have its own configuration file within the font-settings direct
 $font-settings: (
     adjust-ratio: (8/72),
     manual-adjust: (
-        12: 1
-        ...
+        12: 1,
+        // ...
         64: 1,
     )
 );
