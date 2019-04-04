@@ -229,11 +229,7 @@
 ///
 @mixin neutralise($baseline-height: $baseline-height){
   font-family: $default-font-family, $fallback-font-stack;
-  @if $base-use-rem {
-    font-size: 1rem;
-  } @else {
-    font-size: $base-font-size;
-  }
+  font-size: 1rem;
   line-height: $baseline-height;
   margin: {
     top: 0;
