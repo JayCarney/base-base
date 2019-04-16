@@ -6,12 +6,12 @@ $grid-breakpoints: (
   xl: 1200px
 );
 
-$visual-grid: false;
+$visual-grid: true;
 @import '../core/base-base';
 @import 'bootstrap/scss/mixins/breakpoints';
 @import 'cssgrid/src/grid12';
 @include prep_root();
-$test-font: 'Source Sans Pro';
+$test-font: 'Roboto Condensed';
 
 .debug{
     @include debug_baseline(true);
